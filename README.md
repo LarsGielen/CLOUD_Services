@@ -1,10 +1,8 @@
 # CLOUD_Services
 
-https://github.com/openopus-org/openopus_api/tree/master wordt gebruikt voor de data van de componisten etc
-
 ## Conceptidee voor Cloud Services
 ### 1. GraphQL:
-- **Servicenaam:** InstrumentStoreAPI
+- **Servicenaam:** InstrumentLibraryAPI
 - **Programmeertaal:** JavaScript / Node.js
 - **Programmeertaal uit de les:** Python
 
@@ -56,3 +54,6 @@ Een op MQTT gebaseerde service voor het verzenden van realtime updates over nieu
 **Beschrijving:** 
 
 Een WebSocket-service voor het hosten van gezamenlijke muziek sessies. Muzikanten kunnen verbinding maken met de service, deelnemen aan een virtuele kamer waar ze met elkaar kunnen chatten en samen bladmuziek kunnen maken.
+
+## Consumatie van services
+De verschillende services zullen worden geconcumeerd in laravel met php. Ook zal de publieke API van openopus (https://github.com/openopus-org/openopus_api/tree/master) worden gebruikt om een database de hebben van verschillende componisten en hun composities.
