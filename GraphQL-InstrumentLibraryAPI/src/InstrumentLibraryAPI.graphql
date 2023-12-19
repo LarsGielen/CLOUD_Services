@@ -1,0 +1,62 @@
+type Query {
+  # Get all
+  instruments: [Instrument]!
+  instrumentTypes: [InstrumentType]!
+  locations: [Location]!
+
+  filterInstruments(
+    sellerUserName: String
+    instrumentType: String
+    instrumentFamily: InstrumentFamily
+    locationName: String
+    condition: InstrumentCondition
+    priceMin: Int
+    priceMax: Int
+  ): [Instrument]!
+
+  filterInstrumentTypes(instrumentFamily: InstrumentFamily) : [InstrumentType]!
+}
+
+type User {
+  userName: String!
+  email: String!
+  location: Location!
+  instrumentsForSale: [Instrument]!
+}
+
+type Instrument {
+  id: ID!
+  name: String!
+  type: InstrumentType!
+  description: String
+  age: Int
+  condition: InstrumentCondition!
+  price: Float!
+  location: Location!
+  seller: User!
+}
+
+type Location {
+  city: String!
+  instrumentsForSale: [Instrument]!
+}
+
+type InstrumentType {
+  name: String!
+  family: InstrumentFamily!
+  instrumentsForSale: [Instrument]!
+}
+
+enum InstrumentFamily {
+  Strings
+  Woodwind
+  Brass
+  Percussion
+  Electronic
+}
+
+enum InstrumentCondition {
+  NEW
+  USED
+  OLD
+}
