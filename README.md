@@ -1,6 +1,6 @@
 # MusicHub
 ***Discover, book, and share musical experiences with our various services.***
-
+Authentication met laravel beeze
 
 ## Deelservices
 ### 1. GraphQL:
