@@ -1,50 +1,101 @@
 type Query {
-  # Get all
-  instruments: [Instrument]!
+  "Get all the instruments"
+  instrumentPosts: [InstrumentPost]!
+
+  "Get all InstrumentTypes"
   instrumentTypes: [InstrumentType]!
+
+  "Get all locations"
   locations: [Location]!
 
-  filterInstruments(
-    sellerUserName: String
-    instrumentType: String
-    instrumentFamily: InstrumentFamily
-    locationName: String
-    condition: InstrumentCondition
-    priceMin: Int
-    priceMax: Int
-  ): [Instrument]!
+  "Get an instrument by its unique id"
+  instrumentPostwithID(id: ID!): InstrumentPost!
 
+  "Get all posts for instruments that fullfil all set arguments"
+  filterInstrumentPosts(
+    "The username of the seller"
+    sellerUserName: String
+
+    "The type of instrument. ex: 'Cello' or 'Piano'"
+    instrumentType: String
+
+    "The family of the instrument (Strings, Woodwind, Brass, Percussion or Electronic)"
+    instrumentFamily: InstrumentFamily
+
+    "The location where the instrument is getting sold"
+    locationName: String
+
+    "The condition of the instrument (NEW, USED or OLD)"
+    condition: InstrumentCondition
+
+    "The minimum selling price for the instrument"
+    priceMin: Int
+
+    "The maximum selling price for teh instrument"
+    priceMax: Int
+  ): [InstrumentPost]!
+
+  "Get all instrument types of the given family (Strings, Woodwind, Brass, Percussion or Electronic)"
   filterInstrumentTypes(instrumentFamily: InstrumentFamily) : [InstrumentType]!
 }
 
 type User {
+  "The username of the user"
   userName: String!
+
+  "The email of the user"
   email: String!
-  location: Location!
-  instrumentsForSale: [Instrument]!
+
+  "The post for the instruments this user is selling"
+  instrumentsForSale: [InstrumentPost]!
 }
 
-type Instrument {
+type InstrumentPost {
+  "The unique id of this post"
   id: ID!
-  name: String!
-  type: InstrumentType!
+
+  "the title of the post"
+  title: String!
+
+  "The discription of the post"
   description: String
+
+  "The type of instrument this post is selling"
+  type: InstrumentType!
+
+  "The age of the instrument this post is selling"
   age: Int
+
+  "The condition of the instrument this post is selling"
   condition: InstrumentCondition!
+  
+  "The price of the instrument this post is selling"
   price: Float!
+  
+  "The location of the instrument this post is selling"
   location: Location!
+
+  "The username of the seller of the instrument"
   seller: User!
 }
 
 type Location {
+  "The city of the location"
   city: String!
-  instrumentsForSale: [Instrument]!
+  
+  "The instrument posts of all instruments sold at this location"
+  instrumentsForSale: [InstrumentPost]!
 }
 
 type InstrumentType {
+  "The name of this instrument type"
   name: String!
+
+  "The family of this instrument type (Strings, Woodwind, Brass, Percussion or Electronic)"
   family: InstrumentFamily!
-  instrumentsForSale: [Instrument]!
+
+  "The instrument posts of all the instrument of this type"
+  instrumentsForSale: [InstrumentPost]!
 }
 
 enum InstrumentFamily {

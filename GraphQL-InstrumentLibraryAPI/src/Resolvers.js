@@ -1,56 +1,60 @@
 const dataLoader = require('./DataLoader');
 
-const Instruments = dataLoader.loadInstruments();
+const InstrumentPosts = dataLoader.loadInstrumentPosts();
 const InstrumentTypes = dataLoader.loadInstrumentTypes();
 const Users = dataLoader.loadUsers();
 
 // Query Resolvers
 const queryResolver = {
-    instruments: () => Instruments,
+    instrumentPosts: () => InstrumentPosts,
     instrumentTypes: () => InstrumentTypes,
     locations: getAllLocations,
 
-    filterInstruments: filterInstruments,
-    filterInstrumentTypes: filterInstrumentTypes,
+    instrumentPostwithID: getInstrumentPostByID,
+    filterInstrumentPosts: filterInstrumentPosts,
 }
 
 function getAllLocations() {
     const locationSet = new Set();
     Users.forEach(user => locationSet.add(user.location));
-    Instruments.forEach(instrument => locationSet.add(instrument.location));
+    InstrumentPosts.forEach(instrumentPost => locationSet.add(instrumentPost.location));
     return [...locationSet].map(location => ({city: location}));
 }
 
-function filterInstruments(parent, args) {
-    var filtered = Instruments;
+function getInstrumentPostByID(parent, args) {
+    return InstrumentPosts.find(instrumentPost => instrumentPost.id == args.id);
+}
+
+function filterInstrumentPosts(parent, args) {
+    var filtered = InstrumentPosts;
 
     if (args.sellerUserName) {
-        filtered = filtered.filter(instrument => instrument.sellerUserName == args.sellerUserName);
+        filtered = filtered.filter(instrumentPost => instrumentPost.sellerUserName == args.sellerUserName);
     }
 
     if (args.instrumentType) {
-        filtered = filtered.filter(instrument => instrument.type == args.instrumentType);
+        filtered = filtered.filter(instrumentPost => instrumentPost.type == args.instrumentType);
     }
 
     if (args.instrumentFamily) {
         const instrumentTypeNames = filterInstrumentTypes(parent, args).map(type => type.name);
-        filtered = filtered.filter(instrument => instrumentTypeNames.includes(instrument.type));
+        filtered = filtered.filter(instrumentPost => instrumentTypeNames.includes(instrumentPost.type));
     }
 
     if (args.locationName) {
-        filtered = filtered.filter(instrument => instrument.location == args.locationName);
+        filtered = filtered.filter(instrumentPost => instrumentPost.location == args.locationName);
     }
 
     if (args.condition) {
-        filtered = filtered.filter(instrument => instrument.condition == args.condition);
+        filtered = filtered.filter(instrumentPost => instrumentPost.condition == args.condition);
     }
 
     if (args.priceMin) {
-        filtered = filtered.filter(instrument => instrument.price >= args.priceMin);
+        filtered = filtered.filter(instrumentPost => instrumentPost.price >= args.priceMin);
     }
 
     if (args.priceMax) {
-        filtered = filtered.filter(instrument => instrument.price <= args.priceMax);
+        filtered = filtered.filter(instrumentPost => instrumentPost.price <= args.priceMax);
     }
 
     return filtered;
@@ -68,16 +72,12 @@ function filterInstrumentTypes(parent, args) {
 
 // Resolvers for type defentitions
 userResolver = {
-    location: (parent) => {
-        return {city: parent.location};
-    },
-
     instrumentsForSale: (parent) => {
-        return Instruments.filter(instrument => instrument.sellerUserName == parent.userName);
+        return InstrumentPosts.filter(instrumentPost => instrumentPost.sellerUserName == parent.userName);
     },
 }
 
-instrumentResolver = {
+instrumentPostResolver = {
     seller: (parent) => {
         return Users.find(user => user.userName == parent.sellerUserName);
     },
@@ -93,13 +93,13 @@ instrumentResolver = {
 
 locationResolver = {
     instrumentsForSale: (parent) => {
-        return Instruments.filter(instrument => instrument.location == parent.city);
+        return InstrumentPosts.filter(instrumentPost => instrumentPost.location == parent.city);
     },
 }
 
 instrumentTypeResolver = {
     instrumentsForSale: (parent) => {
-        return Instruments.filter(instrument => instrument.type == parent.name);
+        return InstrumentPosts.filter(instrumentPost => instrumentPost.type == parent.name);
     }
 }
 
@@ -107,7 +107,7 @@ instrumentTypeResolver = {
 const resolvers = {
     Query: queryResolver,
     User: userResolver,
-    Instrument: instrumentResolver,
+    InstrumentPost: instrumentPostResolver,
     Location: locationResolver,
     InstrumentType: instrumentTypeResolver,
 }

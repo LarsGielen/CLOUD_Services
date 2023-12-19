@@ -1,4 +1,4 @@
-id,name,type,description,age,condition,price,location,seller
+id,title,type,description,age,condition,price,location,seller
 1,Acoustic Guitar,GUITAR,A beautiful acoustic guitar,3,NEW,500.0,Diepenbeek,Lars_Gielen
 2,Old Grand Piano from my father,PIANO,Classic grand piano,70,OLD,8000.0,Peer,emma_smith
 3,New trumpet,TRUMPET,A new trumpet,1,NEW,600.0,Hasselt,david_jones

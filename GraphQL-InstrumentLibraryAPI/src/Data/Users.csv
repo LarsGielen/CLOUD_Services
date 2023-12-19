@@ -1,4 +1,4 @@
-userName,email,location
-Lars_Gielen,lars@example.com,Pelt
-emma_smith,emma@example.com,Peer
-david_jones,david@example.com,Hasselt
+userName,email
+Lars_Gielen,lars@example.com
+emma_smith,emma@example.com
+david_jones,david@example.com

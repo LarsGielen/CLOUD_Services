@@ -14,13 +14,14 @@ function loadData(fileName, onData) {
     });
 }
 
-function loadInstruments() {
-    const Instruments = [];
-    loadData("Instruments", (row) => {
-        Instruments.push({
-            name: row.name,
-            type: row.type,
+function loadInstrumentPosts() {
+    const InstrumentPosts = [];
+    loadData("InstrumentPosts", (row) => {
+        InstrumentPosts.push({
+            id: parseInt(row.id),
+            title: row.title,
             description: row.description,
+            type: row.type,
             age: parseFloat(row.age),
             condition: row.condition,
             price: parseFloat(row.price),
@@ -29,7 +30,7 @@ function loadInstruments() {
         });
     })
     
-    return Instruments;
+    return InstrumentPosts;
 }
 
 function loadInstrumentTypes() {
@@ -48,10 +49,8 @@ function loadUsers() {
     const Users = [];
     loadData("Users", (row) => {
         Users.push({
-            id: row.id,
             userName: row.userName,
             email: row.email,
-            location: row.location
         });
     })
     
@@ -59,7 +58,7 @@ function loadUsers() {
 }
 
 module.exports = {
-    loadInstruments,
+    loadInstrumentPosts,
     loadInstrumentTypes,
     loadUsers
 };
