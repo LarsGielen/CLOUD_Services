@@ -1,6 +1,8 @@
-# CLOUD_Services
+# MusicHub
+***Discover, book, and share musical experiences with our various services.***
 
-## Conceptidee voor Cloud Services
+
+## Deelservices
 ### 1. GraphQL:
 - **Servicenaam:** InstrumentLibraryAPI
 - **Programmeertaal:** JavaScript / Node.js
