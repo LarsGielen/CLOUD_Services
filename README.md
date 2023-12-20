@@ -6,8 +6,6 @@
   <h1>MusicHub</h1>
 </div>
 
-Authentication met laravel breeze
-
 ## Deelservices
 ### 1. GraphQL:
 - **Servicenaam:** InstrumentLibraryAPI
@@ -64,4 +62,5 @@ Een op MQTT gebaseerde service voor het verzenden van realtime updates over nieu
 Een WebSocket-service voor het hosten van gezamenlijke muziek sessies. Muzikanten kunnen verbinding maken met de service, deelnemen aan een virtuele kamer waar ze met elkaar kunnen chatten en samen bladmuziek kunnen maken.
 
 ## Consumatie van services
-De verschillende services zullen worden geconcumeerd in laravel met php. Ook zal de publieke API van openopus (https://github.com/openopus-org/openopus_api/tree/master) worden gebruikt om een database de hebben van verschillende componisten en hun composities.
+De verschillende services zullen worden geconcumeerd in laravel met php. Ook zal de publieke API van openopus (https://github.com/openopus-org/openopus_api/tree/master) worden gebruikt om een database de hebben van verschillende componisten en hun composities. Authenticatie wordt gedaan met behulp van laravel breeze.
+
