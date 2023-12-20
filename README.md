@@ -1,7 +1,12 @@
-# MusicHub
-***Discover, book, and share musical experiences with our various services.***
+<div align="center" style="display: flex; align-items: center; justify-content: center;">
+  <picture>
+    <source media="(prefers-color-scheme: dark" srcset="https://github.com/LarsG-2158052/CLOUD_Services/assets/146258020/285652eb-1553-462b-9168-17724bf44df3" width="100">
+    <img src="https://github.com/LarsG-2158052/CLOUD_Services/assets/146258020/dc75c008-1ad5-4cf7-b743-39931e011ea3" width="100">
+  </picture>
+  <h1>MusicHub</h1>
+</div>
 
-Authentication met laravel beeze
+Authentication met laravel breeze
 
 ## Deelservices
 ### 1. GraphQL:
