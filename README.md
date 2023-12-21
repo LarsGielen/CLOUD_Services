@@ -1,7 +1,10 @@
-# MusicHub
-***Discover, book, and share musical experiences with our various services.***
-
-Authentication met laravel beeze
+<div align="center" style="display: flex; align-items: center; justify-content: center;">
+  <picture>
+    <source media="(prefers-color-scheme: dark" srcset="https://github.com/LarsG-2158052/CLOUD_Services/assets/146258020/285652eb-1553-462b-9168-17724bf44df3" width="100">
+    <img src="https://github.com/LarsG-2158052/CLOUD_Services/assets/146258020/dc75c008-1ad5-4cf7-b743-39931e011ea3" width="100">
+  </picture>
+  <h1>MusicHub</h1>
+</div>
 
 ## Deelservices
 ### 1. GraphQL:
@@ -59,4 +62,5 @@ Een op MQTT gebaseerde service voor het verzenden van realtime updates over nieu
 Een WebSocket-service voor het hosten van gezamenlijke muziek sessies. Muzikanten kunnen verbinding maken met de service, deelnemen aan een virtuele kamer waar ze met elkaar kunnen chatten en samen bladmuziek kunnen maken.
 
 ## Consumatie van services
-De verschillende services zullen worden geconcumeerd in laravel met php. Ook zal de publieke API van openopus (https://github.com/openopus-org/openopus_api/tree/master) worden gebruikt om een database de hebben van verschillende componisten en hun composities.
+De verschillende services zullen worden geconcumeerd in laravel met php. Ook zal de publieke API van openopus (https://github.com/openopus-org/openopus_api/tree/master) worden gebruikt om een database de hebben van verschillende componisten en hun composities. Authenticatie wordt gedaan met behulp van laravel breeze.
+
