@@ -18,12 +18,12 @@ Een GraphQL-service voor het kopen en verkopen van instrumenten. Muzikanten kunn
 
 ### 2. REST (Representational State Transfer):
 - **Servicenaam:** EventBookingAPI
-- **Programmeertaal:** PHP / Laravel Framework
+- **Programmeertaal:** Python
 - **Programmeertaal uit de les:** PHP / Laravel Framework
 
 **Beschrijving:** 
 
-Een REST API voor het boeken van klassieke muziekevenementen. Muzikanten en evenementorganisatoren kunnen de API gebruiken om locaties voor muziekoptredens te beheren en te boeken. De API stelt gebruikers in staat om te zoeken naar komende evenementen, tickets te boeken en informatie te verkrijgen over de uitvoerders en het programma.
+Een REST API voor het boeken van muziekevenementen. Muzikanten en evenementorganisatoren kunnen de API gebruiken om locaties voor muziekoptredens te beheren en te boeken. De API stelt gebruikers in staat om te zoeken naar komende evenementen, tickets te boeken en informatie te verkrijgen over de uitvoerders en het programma.
 
 ### 3. gRPC (Remote Procedure Call):
 - **Servicenaam:** MusicTunerService
