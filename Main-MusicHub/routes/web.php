@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\InstrumentController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,11 @@ Route::get('/', function () {
 Route::get('/home', function () {
     return view('home.home');
 })->name('home');
+
+// InstrumentLibraryAPI- GraphQL
+Route::get('/instruments', [InstrumentController::class,'index'])->name('instruments.index');
+Route::post('/instruments', [InstrumentController::class,'filter'])->name('instruments.filter');
+Route::get('/instruments/{id}', [InstrumentController::class,'show'])->name('instruments.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -12,6 +12,7 @@ const queryResolver = {
 
     instrumentPostwithID: getInstrumentPostByID,
     filterInstrumentPosts: filterInstrumentPosts,
+    filterInstrumentTypes: filterInstrumentTypes,
 }
 
 function getAllLocations() {
