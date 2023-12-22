@@ -10,10 +10,10 @@ def addBooking():
         userID = request.json['userID'],
         userEmail = request.json['userEmail'],
         bookedSeats = request.json['bookedSeats'],
-        evenement = Event.query.get_or_404(request.json['evenementID'])
+        event = Event.query.get_or_404(request.json['eventID'])
     )
 
-    booking.evenement.remainingSeats -= request.json['bookedSeats']
+    booking.event.remainingSeats -= request.json['bookedSeats']
     
     db.session.add(booking)
     db.session.commit()
@@ -21,7 +21,7 @@ def addBooking():
 
 def deleteBooking(id):
     booking = Booking.query.get_or_404(id)
-    booking.evenement.remainingSeats += booking.bookedSeats
+    booking.event.remainingSeats += booking.bookedSeats
     db.session.delete(booking)
     db.session.commit()
     return {'status': 'succes'}

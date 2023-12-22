@@ -133,7 +133,7 @@ def getOrganizerEventsByID(id):
     events = db.session.query(Event) \
     .filter(Event.organizer_id == id) \
     .all()
-    return {'Events': eventListToJson(events)}
+    return {'events': eventListToJson(events)}
 
 def eventListToJson(list):
     output = []

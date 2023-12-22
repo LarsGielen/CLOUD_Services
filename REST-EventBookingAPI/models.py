@@ -80,13 +80,12 @@ class Booking(db.Model):
     event = db.relationship("Event")
     
     def __repr__(self):
-        return f"{self.userID} - {self.evenement.name}: {self.bookedSeats}"
+        return f"{self.userID} - {self.event.name}: {self.bookedSeats}"
     
     def toJSON(self):
         return {
             'id': self.id ,
             'userID': self.userID ,
-            'evenementID': self.evenementID ,
             'userEmail': self.userEmail ,
             'bookedSeats': self.bookedSeats ,
             'event': self.event.toJSON()
