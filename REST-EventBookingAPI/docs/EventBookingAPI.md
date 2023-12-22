@@ -104,19 +104,20 @@ Single location:
 List of locations:
 ```json
 {
-  "locations": [
-    {
-        "address": "location address 1",
-        "description": "location description 1",
-        "id": 1,
-        "name": "location name 1"
-    },
-    {
-        "address": "location address 2",
-        "description": "location description 2",
-        "id": 2,
-        "name": "location name 2"
-    }
+    "locations": [
+        {
+            "address": "location address 1",
+            "description": "location description 1",
+            "id": 1,
+            "name": "location name 1"
+        },
+        {
+            "address": "location address 2",
+            "description": "location description 2",
+            "id": 2,
+            "name": "location name 2"
+        }
+    ]
 }
 ```
 
