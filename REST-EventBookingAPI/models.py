@@ -12,11 +12,17 @@ class Location(db.Model):
     description = db.Column(db.String, nullable=False)
     address = db.Column(db.String, unique=True, nullable=False)
 
+    def __repr__(self):
+        return self.name
+
 class Organizer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, unique=True, nullable=False)
     description = db.Column(db.String, nullable=False)
     contactPerson = db.Column(db.String, nullable=False)
+
+    def __repr__(self):
+        return self.name
 
 class Evenement(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -31,4 +37,7 @@ class Evenement(db.Model):
 
     location = db.relationship("Location")
     organizer = db.relationship("Organizer")
+
+    def __repr__(self):
+        return self.name
 
