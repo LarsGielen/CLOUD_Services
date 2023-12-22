@@ -130,22 +130,22 @@ GET /api/organizers
 ```
 
 Get an organizer with id:
-```json
+```console
 GET /api/organizers/<id> 
 ```
 
 Create a new organizer:
-```json
+```console
 POST /api/organizers 
 ```
 
 Edit an organizer:
-```json
+```console
 PUT /api/organizers/<id> 
 ```
 
 Delete an organizer:
-```json
+```console
 DELETE /api/organizers/<id> 
 ```
 
