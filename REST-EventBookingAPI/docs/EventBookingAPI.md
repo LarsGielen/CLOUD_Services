@@ -202,19 +202,20 @@ Single organizer:
 List of organizers:
 ```json
 {
-  "organizers": [
-    {
-      "contactPerson": "contact person 1",
-      "description": "description 1",
-      "id": 1,
-      "name": "name 1"
-    },
-    {
-      "contactPerson": "contact person 2",
-      "description": "description 2",
-      "id": 2,
-      "name": "name 2"
-    }
+    "organizers": [
+        {
+        "contactPerson": "contact person 1",
+        "description": "description 1",
+        "id": 1,
+        "name": "name 1"
+        },
+        {
+        "contactPerson": "contact person 2",
+        "description": "description 2",
+        "id": 2,
+        "name": "name 2"
+        }
+    ]
 }
 ```
 
