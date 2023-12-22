@@ -35,7 +35,7 @@ GET /api/locations
 
 Get a single location with its id:
 ```console
-GET /api/locations/<id
+GET /api/locations/<id>
 ```
 
 Create a new location:
