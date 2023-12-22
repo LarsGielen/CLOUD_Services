@@ -65,22 +65,22 @@ GET /api/locations/sorted/popular/<count>
 
 Get all locations sorted by name:
 ```console
-GET /api/locations/sorted/alphabetical`
+GET /api/locations/sorted/alphabetical
 ```
 
 Get the first `count` locations sorted by name:
 ```console
-GET /api/locations/sorted/alphabetical/<count>`
+GET /api/locations/sorted/alphabetical/<count>
 ```
 
 Get all locations that start with the letter `letter`:
 ```console
-GET /api/locations/sorted/alphabetical/letter/<letter>`
+GET /api/locations/sorted/alphabetical/letter/<letter>
 ```
 
 Get the first `count` locations that start with the letter `letter`:
 ```console
-GET /api/locations/sorted/alphabetical/letter/<letter>/<count>`
+GET /api/locations/sorted/alphabetical/letter/<letter>/<count>
 ```
 
 Get all events organized at the given location:
