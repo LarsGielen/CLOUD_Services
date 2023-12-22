@@ -14,6 +14,14 @@ class Location(db.Model):
 
     def __repr__(self):
         return self.name
+    
+    def toJSON(self):
+        return {
+            'id': self.id,
+            'name': self.name, 
+            'description': self.description, 
+            'address': self.address
+        }
 
 class Organizer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -23,6 +31,14 @@ class Organizer(db.Model):
 
     def __repr__(self):
         return self.name
+    
+    def toJSON(self):
+        return {
+            'id': self.id,
+            'name': self.name, 
+            'description': self.description, 
+            'contactPerson': self.contactPerson
+        }
 
 class Evenement(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -40,4 +56,38 @@ class Evenement(db.Model):
 
     def __repr__(self):
         return self.name
+    
+    def toJSON(self):
+        return {
+            'id': self.id, 
+            'name': self.name, 
+            'description': self.description, 
+            'date': self.date, 
+            'ticketPrice': self.ticketPrice, 
+            'seats': self.seats, 
+            'remainingSeats': self.remainingSeats, 
+            'location': self.location.toJSON(), 
+            'organizer': self.organizer.toJSON()
+        }
 
+class Booking(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    userID = db.Column(db.Integer, nullable=False)
+    evenementID = db.Column(db.Integer, db.ForeignKey('evenement.id'), nullable=False)
+    userEmail = db.Column(db.String, nullable=False)
+    bookedSeats = db.Column(db.Integer, nullable=False)
+
+    evenement = db.relationship("Evenement")
+    
+    def __repr__(self):
+        return f"{self.userID} - {self.evenement.name}: {self.bookedSeats}"
+    
+    def toJSON(self):
+        return {
+            'id': self.id ,
+            'userID': self.userID ,
+            'evenementID': self.evenementID ,
+            'userEmail': self.userEmail ,
+            'bookedSeats': self.bookedSeats ,
+            'evenement': self.evenement.toJSON()
+        }

@@ -5,17 +5,17 @@ from models import Location, Evenement,db
 def getLocations():
     locations = Location.query.all()
 
-    return locationListToJson(locations)
+    return {'locations': locationListToJson(locations)}
 
 def getLocationByID(id):
     location = Location.query.get_or_404(id)
-    return {'location': {'id': location.id,'name': location.name, 'description': location.description, 'address': location.address}}
+    return {'location': location.toJSON()}
 
 def addLocation():
     location = Location(name=request.json['name'], description=request.json['description'], address=request.json['address'])
     db.session.add(location)
     db.session.commit()
-    return {'location': {'id': location.id,'name': location.name, 'description': location.description, 'address': location.address}}
+    return {'location': location.toJSON()}
 
 def editLocation(id):
     location = Location.query.get_or_404(id)
@@ -23,7 +23,7 @@ def editLocation(id):
     location.description = request.json['description']
     location.address = request.json['address']
     db.session.commit()
-    return {'location': {'id': location.id,'name': location.name, 'description': location.description, 'address': location.address}}
+    return {'location': location.toJSON()}
 
 def deleteLocation(id):
     location = Location.query.get_or_404(id)
@@ -38,12 +38,10 @@ def getPopularLocations():
     .group_by(Evenement.location_id) \
     .order_by(db.func.count(Evenement.location_id).desc()) \
     .all()
-
     locations = []
     for locationTuple in locationTuples:
         locations.append(locationTuple[0])
-
-    return locationListToJson(locations)
+    return {'locations': locationListToJson(locations)}
 
 def getPopularWithCountLocations(count):
     # Get the first 'count' locations sorted from most common in the event table to lowest
@@ -53,20 +51,17 @@ def getPopularWithCountLocations(count):
     .order_by(db.func.count(Evenement.location_id).desc()) \
     .limit(count) \
     .all()
-    
     locations = []
     for locationTuple in locationTuples:
         locations.append(locationTuple[0])
-
-    return locationListToJson(locations)
+    return {'locations': locationListToJson(locations)}
 
 def getSortedAlphabeticalLocations():
     # get locations sorted by name
     locations = db.session.query(Location) \
     .order_by(Location.name) \
     .all()
-    
-    return locationListToJson(locations)
+    return {'locations': locationListToJson(locations)}
 
 def getSortedAlphabeticalWithCountLocations(count):
     # get locations sorted by name
@@ -74,8 +69,7 @@ def getSortedAlphabeticalWithCountLocations(count):
     .order_by(Location.name) \
     .limit(count) \
     .all()
-    
-    return locationListToJson(locations)
+    return {'locations': locationListToJson(locations)}
 
 def getSortedAlphabeticalWithLetterLocations(letter):
     # get locations sorted by name and start with letter 'letter'
@@ -83,7 +77,7 @@ def getSortedAlphabeticalWithLetterLocations(letter):
     .filter(Location.name.ilike(letter + '%')) \
     .order_by(Location.name) \
     .all()
-    return locationListToJson(locations)
+    return {'locations': locationListToJson(locations)}
 
 def getSortedAlphabeticalWithLetterWithCountLocations(letter, count):
     # get the first 'count' locations sorted by name and start with letter 'letter'
@@ -92,11 +86,10 @@ def getSortedAlphabeticalWithLetterWithCountLocations(letter, count):
     .order_by(Location.name) \
     .limit(count) \
     .all()
-    return locationListToJson(locations)
+    return {'locations': locationListToJson(locations)} 
 
 def locationListToJson(list):
     output = []
     for location in list:
-        locationData = {'id': location.id,'name': location.name, 'description': location.description, 'address': location.address}
-        output.append(locationData)
-    return {'locations': output}
+        output.append(location.toJSON())
+    return output

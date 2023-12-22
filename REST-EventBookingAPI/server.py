@@ -9,6 +9,7 @@ from models import db
 from routes_location import *
 from routes_organizer import *
 from routes_evenement import *
+from routes_booking import *
 from createDatabase import createDatabase
 
 server = Flask(__name__)
@@ -72,6 +73,11 @@ server.add_url_rule('/api/evenements/<id>', view_func=getEvenementByID) # Get an
 server.add_url_rule('/api/evenements', view_func=addEvenement, methods=['POST']) # Create a new evenement
 server.add_url_rule('/api/evenements/<id>', view_func=editEvenement, methods=['PUT']) # Edit an evenement
 server.add_url_rule('/api/evenements/<id>', view_func=deleteEvenement, methods=['DELETE']) # Delete an evenement
+
+# Booking routes
+server.add_url_rule('/api/booking/<id>', view_func=getBookedEvenementsByUserID) # Get bookings from user with userID
+server.add_url_rule('/api/booking', view_func=addBooking, methods=['POST']) # Create a new booking
+server.add_url_rule('/api/booking/<id>', view_func=deleteBooking, methods=['DELETE']) # Delete a booking with ID
 
 # start server
 server.run(port=5000)
