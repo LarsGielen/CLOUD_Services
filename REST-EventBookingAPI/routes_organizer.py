@@ -1,7 +1,7 @@
 from flask import request
-from models import Organizer, Evenement,db
+from models import Organizer, Event,db
 
-def getOrganizer():
+def getOrganizers():
     organizers = Organizer.query.all()
     return {'organizers': organizerListToJson(organizers)}
 
@@ -31,10 +31,10 @@ def deleteOrganizer(id):
 
 def getPopularOrganizers():
     # Get the organizers sorted from most common in the event table to lowest
-    organizerTuples = db.session.query(Organizer, db.func.count(Evenement.location_id).label('count')) \
-    .join(Evenement, Organizer.id == Evenement.location_id, isouter=True) \
-    .group_by(Evenement.location_id) \
-    .order_by(db.func.count(Evenement.location_id).desc()) \
+    organizerTuples = db.session.query(Organizer, db.func.count(Event.location_id).label('count')) \
+    .join(Event, Organizer.id == Event.location_id, isouter=True) \
+    .group_by(Event.location_id) \
+    .order_by(db.func.count(Event.location_id).desc()) \
     .all()
     organizers = []
     for organizerTuple in organizerTuples:
@@ -43,10 +43,10 @@ def getPopularOrganizers():
 
 def getPopularWithCountOrganizers(count):
     # Get the first 'count' organizers sorted from most common in the event table to lowest
-    organizerTuples = db.session.query(Organizer, db.func.count(Evenement.location_id).label('count')) \
-    .join(Evenement, Organizer.id == Evenement.location_id, isouter=True) \
-    .group_by(Evenement.location_id) \
-    .order_by(db.func.count(Evenement.location_id).desc()) \
+    organizerTuples = db.session.query(Organizer, db.func.count(Event.location_id).label('count')) \
+    .join(Event, Organizer.id == Event.location_id, isouter=True) \
+    .group_by(Event.location_id) \
+    .order_by(db.func.count(Event.location_id).desc()) \
     .limit(count) \
     .all()
     organizers = []

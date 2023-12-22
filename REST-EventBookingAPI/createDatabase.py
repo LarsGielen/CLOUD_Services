@@ -22,10 +22,10 @@ def createDatabase(server, db):
             db.session.commit()
 
         # Create dummy events
-        if db.session.query(Evenement).count() == 0:
+        if db.session.query(Event).count() == 0:
             events = []
             for _ in range(10):
-                event = Evenement(
+                event = Event(
                     name=fake.word(),
                     description=fake.text(),
                     date=fake.date_time_between(start_date='now', end_date='+30d'),

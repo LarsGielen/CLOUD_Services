@@ -1,7 +1,7 @@
 from flask import request
-from models import Booking, Evenement, db
+from models import Booking, Event, db
 
-def getBookedEvenementsByUserID(id):
+def getBookedEventsByUserID(id):
     evenemens = db.session.query(Booking).filter(Booking.userID == id)
     return {'bookings': bookingListToJson(evenemens)}
 
@@ -10,7 +10,7 @@ def addBooking():
         userID = request.json['userID'],
         userEmail = request.json['userEmail'],
         bookedSeats = request.json['bookedSeats'],
-        evenement = Evenement.query.get_or_404(request.json['evenementID'])
+        evenement = Event.query.get_or_404(request.json['evenementID'])
     )
 
     booking.evenement.remainingSeats -= request.json['bookedSeats']

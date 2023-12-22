@@ -40,7 +40,7 @@ class Organizer(db.Model):
             'contactPerson': self.contactPerson
         }
 
-class Evenement(db.Model):
+class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, unique=True, nullable=False)
     description = db.Column(db.String, nullable=False)
@@ -73,11 +73,11 @@ class Evenement(db.Model):
 class Booking(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     userID = db.Column(db.Integer, nullable=False)
-    evenementID = db.Column(db.Integer, db.ForeignKey('evenement.id'), nullable=False)
+    eventID = db.Column(db.Integer, db.ForeignKey('event.id'), nullable=False)
     userEmail = db.Column(db.String, nullable=False)
     bookedSeats = db.Column(db.Integer, nullable=False)
 
-    evenement = db.relationship("Evenement")
+    event = db.relationship("Event")
     
     def __repr__(self):
         return f"{self.userID} - {self.evenement.name}: {self.bookedSeats}"
@@ -89,5 +89,5 @@ class Booking(db.Model):
             'evenementID': self.evenementID ,
             'userEmail': self.userEmail ,
             'bookedSeats': self.bookedSeats ,
-            'evenement': self.evenement.toJSON()
+            'event': self.event.toJSON()
         }

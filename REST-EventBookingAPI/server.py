@@ -8,7 +8,7 @@ from flask import Flask
 from models import db
 from routes_location import *
 from routes_organizer import *
-from routes_evenement import *
+from routes_event import *
 from routes_booking import *
 from createDatabase import createDatabase
 
@@ -28,7 +28,7 @@ server.add_url_rule('/api/locations/sorted/alphabetical/<count>', view_func=getS
 server.add_url_rule('/api/locations/sorted/alphabetical/letter/<letter>', view_func=getSortedAlphabeticalWithLetterLocations) # Get the locations that start with the letter 'letter'
 server.add_url_rule('/api/locations/sorted/alphabetical/letter/<letter>/<count>', view_func=getSortedAlphabeticalWithLetterWithCountLocations) # Get 'count' locations that start with the letter 'letter'
 
-server.add_url_rule('/api/locations/evenements/<id>', view_func=getLocationEvenementsByID) # Get evenements organized at the given location
+server.add_url_rule('/api/locations/events/<id>', view_func=getLocationEventsByID) # Get events organized at the given location
 
 server.add_url_rule('/api/locations', view_func=getLocations) # Get all locations
 server.add_url_rule('/api/locations/<id>', view_func=getLocationByID) # Get a location with id
@@ -45,37 +45,37 @@ server.add_url_rule('/api/organizers/sorted/alphabetical/<count>', view_func=get
 server.add_url_rule('/api/organizers/sorted/alphabetical/letter/<letter>', view_func=getSortedAlphabeticalWithLetterOrganizers) # Get the organizers that start with the letter 'letter'
 server.add_url_rule('/api/organizers/sorted/alphabetical/letter/<letter>/<count>', view_func=getSortedAlphabeticalWithLetterWithCountOrganizers) # Get 'count' organizers that start with the letter 'letter'
 
-server.add_url_rule('/api/organizers/evenements/<id>', view_func=getOrganizerEvenementsByID) # Get evenements organized by the given organizer
+server.add_url_rule('/api/organizers/events/<id>', view_func=getOrganizerEventsByID) # Get events organized by the given organizer
 
-server.add_url_rule('/api/organizers', view_func=getOrganizer) # Get all organizers
+server.add_url_rule('/api/organizers', view_func=getOrganizers) # Get all organizers
 server.add_url_rule('/api/organizers/<id>', view_func=getOrganizerByID) # Get an organizer with id
 server.add_url_rule('/api/organizers', view_func=addOrganizer, methods=['POST']) # Create a new organizer
 server.add_url_rule('/api/organizers/<id>', view_func=editOrganizer, methods=['PUT']) # Edit an organizer
 server.add_url_rule('/api/organizers/<id>', view_func=deleteOrganizer, methods=['DELETE']) # Delete an organizer
 
-# Evenement routes
-server.add_url_rule('/api/evenements/sorted/popular', view_func=getPopularEvenements) # Get evenements sorted on popularity
-server.add_url_rule('/api/evenements/sorted/popular/<count>', view_func=getPopularWithCountEvements) # Get the 'count' most pupular evenements sorted on popularity
+# Event routes
+server.add_url_rule('/api/events/sorted/popular', view_func=getPopularEvents) # Get events sorted on popularity
+server.add_url_rule('/api/events/sorted/popular/<count>', view_func=getPopularWithCountEvents) # Get the 'count' most pupular events sorted on popularity
 
-server.add_url_rule('/api/evenements/sorted/alphabetical', view_func=getSortedAlphabeticalEvenements) # Get evenements sorted on name
-server.add_url_rule('/api/evenements/sorted/alphabetical/<count>', view_func=getSortedAlphabeticalWithCountEvenements) # Get 'count' evenements sorted on name
-server.add_url_rule('/api/evenements/sorted/alphabetical/letter/<letter>', view_func=getSortedAlphabeticalWithLetterEvenements) # Get the evenements that start with the letter 'letter'
-server.add_url_rule('/api/evenements/sorted/alphabetical/letter/<letter>/<count>', view_func=getSortedAlphabeticalWithLetterWithCountEvenements) # Get 'count' evenements that start with the letter 'letter'
+server.add_url_rule('/api/events/sorted/alphabetical', view_func=getSortedAlphabeticalEvents) # Get events sorted on name
+server.add_url_rule('/api/events/sorted/alphabetical/<count>', view_func=getSortedAlphabeticalWithCountEvents) # Get 'count' events sorted on name
+server.add_url_rule('/api/events/sorted/alphabetical/letter/<letter>', view_func=getSortedAlphabeticalWithLetterEvents) # Get the events that start with the letter 'letter'
+server.add_url_rule('/api/events/sorted/alphabetical/letter/<letter>/<count>', view_func=getSortedAlphabeticalWithLetterWithCountEvents) # Get 'count' events that start with the letter 'letter'
 
-server.add_url_rule('/api/evenements/sorted/price', view_func=getSortedTicketPriceEvenements) # Get evenements sorted by ticket price (low to high)
-server.add_url_rule('/api/evenements/sorted/price/<count>', view_func=getSortedTicketPriceWithCountEvenements) # Get 'count' evenements sorted by ticket price (low to high)
+server.add_url_rule('/api/events/sorted/price', view_func=getSortedTicketPriceEvents) # Get events sorted by ticket price (low to high)
+server.add_url_rule('/api/events/sorted/price/<count>', view_func=getSortedTicketPriceWithCountEvents) # Get 'count' events sorted by ticket price (low to high)
 
-server.add_url_rule('/api/evenements/sorted/date', view_func=getSortedDateEvenements) # Get evenements sorted by date (early first)
-server.add_url_rule('/api/evenements/sorted/date/<count>', view_func=getSortedDateWithCountEvenements) # Get 'count' evenements sorted by date (early first)
+server.add_url_rule('/api/events/sorted/date', view_func=getSortedDateEvents) # Get events sorted by date (early first)
+server.add_url_rule('/api/events/sorted/date/<count>', view_func=getSortedDateWithCountEvents) # Get 'count' events sorted by date (early first)
 
-server.add_url_rule('/api/evenements', view_func=getEvenement) # Get all evenements
-server.add_url_rule('/api/evenements/<id>', view_func=getEvenementByID) # Get an evenement with id
-server.add_url_rule('/api/evenements', view_func=addEvenement, methods=['POST']) # Create a new evenement
-server.add_url_rule('/api/evenements/<id>', view_func=editEvenement, methods=['PUT']) # Edit an evenement
-server.add_url_rule('/api/evenements/<id>', view_func=deleteEvenement, methods=['DELETE']) # Delete an evenement
+server.add_url_rule('/api/events', view_func=getEvents) # Get all events
+server.add_url_rule('/api/events/<id>', view_func=getEventByID) # Get an event with id
+server.add_url_rule('/api/events', view_func=addEvent, methods=['POST']) # Create a new event
+server.add_url_rule('/api/events/<id>', view_func=editEvent, methods=['PUT']) # Edit an event
+server.add_url_rule('/api/events/<id>', view_func=deleteEvent, methods=['DELETE']) # Delete an event
 
 # Booking routes
-server.add_url_rule('/api/booking/<id>', view_func=getBookedEvenementsByUserID) # Get bookings from user with userID
+server.add_url_rule('/api/booking/<id>', view_func=getBookedEventsByUserID) # Get bookings from user with userID
 server.add_url_rule('/api/booking', view_func=addBooking, methods=['POST']) # Create a new booking
 server.add_url_rule('/api/booking/<id>', view_func=deleteBooking, methods=['DELETE']) # Delete a booking with ID
 

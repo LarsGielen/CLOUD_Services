@@ -1,6 +1,6 @@
 
 from flask import request
-from models import Location, Evenement,db
+from models import Location, Event,db
     
 def getLocations():
     locations = Location.query.all()
@@ -33,10 +33,10 @@ def deleteLocation(id):
 
 def getPopularLocations():
     # Get the locations sorted from most common in the event table to lowest
-    locationTuples = db.session.query(Location, db.func.count(Evenement.location_id).label('count')) \
-    .join(Evenement, Location.id == Evenement.location_id, isouter=True) \
-    .group_by(Evenement.location_id) \
-    .order_by(db.func.count(Evenement.location_id).desc()) \
+    locationTuples = db.session.query(Location, db.func.count(Event.location_id).label('count')) \
+    .join(Event, Location.id == Event.location_id, isouter=True) \
+    .group_by(Event.location_id) \
+    .order_by(db.func.count(Event.location_id).desc()) \
     .all()
     locations = []
     for locationTuple in locationTuples:
@@ -45,10 +45,10 @@ def getPopularLocations():
 
 def getPopularWithCountLocations(count):
     # Get the first 'count' locations sorted from most common in the event table to lowest
-    locationTuples = db.session.query(Location, db.func.count(Evenement.location_id).label('count')) \
-    .join(Evenement, Location.id == Evenement.location_id, isouter=True) \
-    .group_by(Evenement.location_id) \
-    .order_by(db.func.count(Evenement.location_id).desc()) \
+    locationTuples = db.session.query(Location, db.func.count(Event.location_id).label('count')) \
+    .join(Event, Location.id == Event.location_id, isouter=True) \
+    .group_by(Event.location_id) \
+    .order_by(db.func.count(Event.location_id).desc()) \
     .limit(count) \
     .all()
     locations = []
