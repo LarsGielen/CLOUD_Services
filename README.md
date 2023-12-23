@@ -35,8 +35,8 @@ Een REST API voor het boeken van muziekevenementen. Muzikanten en evenementorgan
 Een gRPC-service voor het stemmen van muziekinstrumenten. Muzikanten kunnen verbinding maken met de Tuner-service, het stemproces starten, continue updates over de stemstatus ontvangen en zo nodig aanpassingen maken.
 
 ### 4. SOAP (Simple Object Access Protocol):
-- **Servicenaam:** SheetMusicRepository
-- **Programmeertaal:** Java
+- **Servicenaam:** SheetMusicAPI
+- **Programmeertaal:** php
 - **Programmeertaal uit de les:** C#
 
 **Beschrijving:** 
