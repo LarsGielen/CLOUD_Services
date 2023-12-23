@@ -11,9 +11,7 @@
             <h2 class="font-bold text-xl">
                 {{ $title }}
             </h2>
-            <p>
-                {{ $info }}
-            </p>
+            {{ $info }}
         </div>
         <div class="flex justify-end">
             <a href="{{ $buttonRef }}">

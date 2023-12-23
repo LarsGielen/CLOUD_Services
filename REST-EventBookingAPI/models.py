@@ -11,16 +11,18 @@ class Location(db.Model):
     name = db.Column(db.String, unique=True, nullable=False)
     description = db.Column(db.String, nullable=False)
     address = db.Column(db.String, unique=True, nullable=False)
+    imageURL = db.Column(db.String, unique=False, nullable=True)
 
     def __repr__(self):
         return self.name
     
     def toJSON(self):
         return {
-            'id': self.id,
-            'name': self.name, 
+            'address': self.address,
             'description': self.description, 
-            'address': self.address
+            'id': self.id,
+            'imageURL': self.imageURL,
+            'name': self.name, 
         }
 
 class Organizer(db.Model):
@@ -28,16 +30,18 @@ class Organizer(db.Model):
     name = db.Column(db.String, unique=True, nullable=False)
     description = db.Column(db.String, nullable=False)
     contactPerson = db.Column(db.String, nullable=False)
+    imageURL = db.Column(db.String, unique=False, nullable=True)
 
     def __repr__(self):
         return self.name
     
     def toJSON(self):
         return {
-            'id': self.id,
-            'name': self.name, 
+            'contactPerson': self.contactPerson,
             'description': self.description, 
-            'contactPerson': self.contactPerson
+            'id': self.id,
+            'imageURL': self.imageURL,
+            'name': self.name, 
         }
 
 class Event(db.Model):
@@ -50,6 +54,7 @@ class Event(db.Model):
     remainingSeats = db.Column(db.Integer, nullable=False)
     location_id = db.Column(db.Integer, db.ForeignKey('location.id'), nullable=False)
     organizer_id = db.Column(db.Integer, db.ForeignKey('organizer.id'), nullable=False)
+    imageURL = db.Column(db.String, unique=False, nullable=True)
 
     location = db.relationship("Location")
     organizer = db.relationship("Organizer")
@@ -59,15 +64,25 @@ class Event(db.Model):
     
     def toJSON(self):
         return {
-            'id': self.id, 
-            'name': self.name, 
+            'dateTime': {
+                'date': f"{self.date.day}-{self.date.month}-{self.date.year}",
+                'day': self.date.day,
+                'full': f"{self.date.day}-{self.date.month}-{self.date.year} {self.date.hour}:{self.date.minute}",
+                'hour': self.date.hour,
+                'minute': self.date.minute,
+                'month': self.date.month,
+                'year': self.date.year,
+                'time': f"{self.date.hour}:{self.date.minute}",
+            }, 
             'description': self.description, 
-            'date': self.date, 
-            'ticketPrice': self.ticketPrice, 
-            'seats': self.seats, 
-            'remainingSeats': self.remainingSeats, 
+            'id': self.id, 
+            'imageURL': self.imageURL,
             'location': self.location.toJSON(), 
-            'organizer': self.organizer.toJSON()
+            'name': self.name, 
+            'organizer': self.organizer.toJSON(),
+            'remainingSeats': self.remainingSeats, 
+            'seats': self.seats, 
+            'ticketPrice': self.ticketPrice, 
         }
 
 class Booking(db.Model):
@@ -75,18 +90,20 @@ class Booking(db.Model):
     userID = db.Column(db.Integer, nullable=False)
     eventID = db.Column(db.Integer, db.ForeignKey('event.id'), nullable=False)
     userEmail = db.Column(db.String, nullable=False)
-    bookedSeats = db.Column(db.Integer, nullable=False)
+    ticketAmount = db.Column(db.Integer, nullable=False)
 
     event = db.relationship("Event")
-    
+
+    db.UniqueConstraint('userID', 'eventID')
+
     def __repr__(self):
-        return f"{self.userID} - {self.event.name}: {self.bookedSeats}"
+        return f"{self.userID} - {self.event.name}: {self.ticketAmount}"
     
     def toJSON(self):
         return {
+            'event': self.event.toJSON(),
             'id': self.id ,
-            'userID': self.userID ,
+            'ticketAmount': self.ticketAmount ,
             'userEmail': self.userEmail ,
-            'bookedSeats': self.bookedSeats ,
-            'event': self.event.toJSON()
+            'userID': self.userID ,
         }

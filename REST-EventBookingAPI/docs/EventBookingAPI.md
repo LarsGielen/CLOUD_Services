@@ -96,7 +96,8 @@ Single location:
     "address": "location address",
     "description": "location description",
     "id": 1,
-    "name": "location name"
+    "imageURL": "location.imageURL",
+    "name": "location name",
   }
 }
 ```
@@ -109,12 +110,14 @@ List of locations:
             "address": "location address 1",
             "description": "location description 1",
             "id": 1,
+            "imageURL": "location.imageURL 1",
             "name": "location name 1"
         },
         {
             "address": "location address 2",
             "description": "location description 2",
             "id": 2,
+            "imageURL": "location imageURL 2",
             "name": "location name 2"
         }
     ]
@@ -194,6 +197,7 @@ Single organizer:
       "contactPerson": "contact person",
       "description": "description",
       "id": 1,
+      "imageURL": "imageURL",
       "name": "name"
     }
 }
@@ -207,12 +211,14 @@ List of organizers:
         "contactPerson": "contact person 1",
         "description": "description 1",
         "id": 1,
+        "imageURL": "imageURL 1",
         "name": "name 1"
         },
         {
         "contactPerson": "contact person 2",
         "description": "description 2",
         "id": 2,
+        "imageURL": "imageURL 2",
         "name": "name 2"
         }
     ]
@@ -304,13 +310,24 @@ Single event:
 ```json
 {
     "event": {
-        "date": "event date",
+        "dateTime": {
+            "date": "1-2-2024",
+            "day": 1,
+            "full": "1-2-2024 8:30",
+            "hour": 8,
+            "minute": 30,
+            "month": 2,
+            "time": "8:30",
+            "year": 2024
+        },
         "description": "event description",
         "id": 1,
+        "imageURL": "event imageURL",
         "location": {
             "address": "event location address",
             "description": "event location description",
             "id": 1,
+            "imageURL": "event location imageURL",
             "name": "event location name"
             },
         "name": "event name",
@@ -318,6 +335,7 @@ Single event:
             "contactPerson": "event organizer contactPerson",
             "description": "event organizer description",
             "id": 1,
+            "imageURL": "event organizer imageURL",
             "name": "event organizer name"
         },
         "remainingSeats": 10,
@@ -332,13 +350,24 @@ List of events:
 {
     "events": [
         {
-            "date": "event date 1",
+            "dateTime": {
+                "date": "1-2-2024",
+                "day": 1,
+                "full": "1-2-2024 8:30",
+                "hour": 8,
+                "minute": 30,
+                "month": 2,
+                "time": "8:30",
+                "year": 2024
+            },
             "description": "event description 1",
             "id": 1,
+            "imageURL": "event imageURL 1",
             "location": {
                 "address": "event location address 1",
                 "description": "event location description 1",
                 "id": 1,
+                "imageURL": "event location imageURL 1",
                 "name": "event location name 1"
             },
             "name": "event name 1",
@@ -346,20 +375,32 @@ List of events:
                 "contactPerson": "event organizer contactPerson 1",
                 "description": "event organizer description 1",
                 "id": 1,
+                "imageURL": "event organizer imageURL 1",
                 "name": "event organizer name 1"
             },
             "remainingSeats": 10,
             "seats": 100,
             "ticketPrice": 50
-            },
-            {
-            "date": "event date 2",
+        },
+        {
+            "dateTime": {
+                "date": "1-2-2024",
+                "day": 1,
+                "full": "1-2-2024 8:30",
+                "hour": 8,
+                "minute": 30,
+                "month": 2,
+                "time": "8:30",
+                "year": 2024
+            }, 
             "description": "event description 2",
             "id": 2,
+            "imageURL": "event imageURL 2",
             "location": {
                 "address": "event location address 2",
                 "description": "event location description 2",
                 "id": 2,
+                "imageURL": "event location imageURL 2",
                 "name": "event location name 2"
             },
             "name": "event name 2",
@@ -367,6 +408,7 @@ List of events:
                 "contactPerson": "event organizer contactPerson 2",
                 "description": "event organizer description 2",
                 "id": 2,
+                "imageURL": "event organizer imageURL 2",
                 "name": "event organizer name 2"
             },
             "remainingSeats": 10,
@@ -402,9 +444,18 @@ Single booking:
 ```json
 {
     "booking": {
-        "bookedSeats": 5,
+        "ticketAmount": 5,
         "event":  {
-            "date": "booking event date",
+            "dateTime": {
+                "date": "1-2-2024",
+                "day": 1,
+                "full": "1-2-2024 8:30",
+                "hour": 8,
+                "minute": 30,
+                "month": 2,
+                "time": "8:30",
+                "year": 2024
+            },
             "description": "booking event description",
             "id": 1,
             "location": {
@@ -436,9 +487,18 @@ List of bookings:
 {
     "bookings": [
         {
-            "bookedSeats": 5,
+            "ticketAmount": 5,
             "event":  {
-                "date": "booking event date 1",
+                "dateTime": {
+                    "date": "1-2-2024",
+                    "day": 1,
+                    "full": "1-2-2024 8:30",
+                    "hour": 8,
+                    "minute": 30,
+                    "month": 2,
+                    "time": "8:30",
+                    "year": 2024
+                },
                 "description": "booking event description 1",
                 "id": 1,
                 "location": {
@@ -463,9 +523,18 @@ List of bookings:
             "userID": 1
         },
         {
-            "bookedSeats": 5,
+            "ticketAmount": 5,
             "event":  {
-                "date": "booking event date 2",
+                "dateTime": {
+                    "date": "1-2-2024",
+                    "day": 1,
+                    "full": "1-2-2024 8:30",
+                    "hour": 8,
+                    "minute": 30,
+                    "month": 2,
+                    "time": "8:30",
+                    "year": 2024
+                },
                 "description": "booking event description 2",
                 "id": 2,
                 "location": {
@@ -492,3 +561,27 @@ List of bookings:
     ]
 }
 ```
+
+post:
+```php
+    Http::withHeaders([
+        'Content-Type' => 'application/json',
+    ])->post("http://127.0.0.1:5000/api/booking", [
+        'userID' => intValue,
+        'userEmail'=> stringValue,
+        'ticketAmount'=> intValue
+        'eventID'=> intValue
+    ]);
+```
+
+## Error handling
+
+if an error occurs the server will send a 400 status code with an error message:
+
+```json
+{
+    "error": "Error message"
+}
+```
+
+if a query failed, the server will send a 404 status code

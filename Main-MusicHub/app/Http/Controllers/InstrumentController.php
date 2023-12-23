@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Http;
 class InstrumentController extends Controller
 {
     /**
-     * Show the instrument password view.
+     * Show the instrument index view.
      */
     public function index(): View
     {
@@ -138,6 +138,9 @@ class InstrumentController extends Controller
         ]);
     }
 
+    /**
+     * Shows an instrument in detail
+     */
     public function show(string $id): View
     {
         $query = "
