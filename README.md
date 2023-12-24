@@ -26,13 +26,13 @@ Een GraphQL-service voor het kopen en verkopen van instrumenten. Muzikanten kunn
 Een REST API voor het boeken van muziekevenementen. Muzikanten en evenementorganisatoren kunnen de API gebruiken om locaties voor muziekoptredens te beheren en te boeken. De API stelt gebruikers in staat om te zoeken naar komende evenementen, tickets te boeken en informatie te verkrijgen over de uitvoerders en het programma.
 
 ### 3. gRPC (Remote Procedure Call):
-- **Servicenaam:** MusicTunerService
+- **Servicenaam:** MessageAPI
 - **Programmeertaal:** C#
 - **Programmeertaal uit de les:** java
 
 **Beschrijving:** 
 
-Een gRPC-service voor het stemmen van muziekinstrumenten. Muzikanten kunnen verbinding maken met de Tuner-service, het stemproces starten, continue updates over de stemstatus ontvangen en zo nodig aanpassingen maken.
+Een gRPC-service voor het sturen van berichten tussen gebruikers.
 
 ### 4. SOAP (Simple Object Access Protocol):
 - **Servicenaam:** SheetMusicAPI
