@@ -71,7 +71,7 @@ class SheetMusic {
         ]);
     }
 
-    public static function sheetMusicListToJson($sheetMusicList) {
+    public static function sheetMusicList($sheetMusicList) {
         $jsonArray = [];
 
         foreach ($sheetMusicList as $sheetMusic) {
@@ -84,7 +84,7 @@ class SheetMusic {
             ];
         }
 
-        return json_encode($jsonArray);
+        return $jsonArray;
     }
 }
 

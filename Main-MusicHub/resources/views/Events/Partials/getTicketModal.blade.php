@@ -1,4 +1,4 @@
-<x-modal name="getTicketModal" :show="$errors->userDeletion->isNotEmpty()" focusable>
+<x-modal name="getTicketModal" focusable>
     <form 
         method="post" 
         action="{{ route('events.book')  }}" 

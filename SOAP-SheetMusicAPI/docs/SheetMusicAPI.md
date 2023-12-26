@@ -60,7 +60,7 @@ This function stores the given music on the server and returns the newly created
 <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://localhost:5050/SheetMusicAPI.php" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
     <SOAP-ENV:Body>
         <ns1:storeMusicResponse>
-            <return xsi:type="xsd:string">{"data":"[{\"id\":1,\"abcNotation\":\"[string]\",\"userID\":2,\"musicTitle\":\"[string]\",\"pdfUrl\":null}]"}</return>
+            <return xsi:type="xsd:string">{"data":[{"id":1,"abcNotation":"...","userID":1,"musicTitle":"Title","pdfUrl":"..."}]}</return>
         </ns1:storeMusicResponse>
     </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>
@@ -85,7 +85,7 @@ This function returns all the music stored in the API.
 <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://localhost:5050/SheetMusicAPI.php" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
     <SOAP-ENV:Body>
         <ns1:getMusicResponse>
-            <return xsi:type="xsd:string">{"data":"[{\"id\":1,\"abcNotation\":\"[string]\",\"userID\":2,\"musicTitle\":\"[string]\",\"pdfUrl\":null}, {\"id\":3,\"abcNotation\":\"[string]\",\"userID\":4,\"musicTitle\":\"[string]\",\"pdfUrl\":null}]"}</return>
+            <return xsi:type="xsd:string">{"data":[{"id":1,"abcNotation":"...","userID":1,"musicTitle":"Title","pdfUrl":"..."},{"id":2,"abcNotation":"...","userID":2,"musicTitle":"Title","pdfUrl":null}]}</return>
         </ns1:getMusicResponse>
     </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>
@@ -113,7 +113,7 @@ This function returns the music for the given ID.
 <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://localhost:5050/SheetMusicAPI.php" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
     <SOAP-ENV:Body>
         <ns1:getMusicByIDResponse>
-            <return xsi:type="xsd:string">{"data":"[{"data":"[{\"id\":1,\"abcNotation\":\"[string]\",\"userID\":2,\"musicTitle\":\"[string]\",\"pdfUrl\":null}, {\"id\":3,\"abcNotation\":\"[string]\",\"userID\":4,\"musicTitle\":\"[string]\",\"pdfUrl\":null}]"}]"}</return>
+            <return xsi:type="xsd:string">{"data":[{"id":1,"abcNotation":"...","userID":1,"musicTitle":"Title","pdfUrl":"..."},{"id":2,"abcNotation":"...","userID":2,"musicTitle":"Title","pdfUrl":null}]}</return>
         </ns1:getMusicByIDResponse>
     </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>
@@ -141,7 +141,7 @@ This function returns all music for the given user ID.
 <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://localhost:5050/SheetMusicAPI.php" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
     <SOAP-ENV:Body>
         <ns1:getMusicByUserIDResponse>
-            <return xsi:type="xsd:string">{"data":"[{"data":"[{\"id\":1,\"abcNotation\":\"[string]\",\"userID\":2,\"musicTitle\":\"[string]\",\"pdfUrl\":null}, {\"id\":3,\"abcNotation\":\"[string]\",\"userID\":4,\"musicTitle\":\"[string]\",\"pdfUrl\":null}]"}]"}</return>
+            <return xsi:type="xsd:string">{"data":[{"id":1,"abcNotation":"...","userID":1,"musicTitle":"Title","pdfUrl":"..."},{"id":2,"abcNotation":"...","userID":2,"musicTitle":"Title","pdfUrl":null}]}</return>
         </ns1:getMusicByUserIDResponse>
     </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>
@@ -169,7 +169,7 @@ This function returns all the music with the given title.
 <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://localhost:5050/SheetMusicAPI.php" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
     <SOAP-ENV:Body>
         <ns1:getMusicByTitleResponse>
-            <return xsi:type="xsd:string">{"data":"[{"data":"[{\"id\":1,\"abcNotation\":\"[string]\",\"userID\":2,\"musicTitle\":\"[string]\",\"pdfUrl\":null}, {\"id\":3,\"abcNotation\":\"[string]\",\"userID\":4,\"musicTitle\":\"[string]\",\"pdfUrl\":null}]"}]"}</return>
+            <return xsi:type="xsd:string">{"data":[{"id":1,"abcNotation":"...","userID":1,"musicTitle":"Title","pdfUrl":"..."},{"id":2,"abcNotation":"...","userID":2,"musicTitle":"Title","pdfUrl":null}]}</return>
         </ns1:getMusicByTitleResponse>
     </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>
@@ -197,7 +197,7 @@ This function returns all the music with a title that contains the given title.
 <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://localhost:5050/SheetMusicAPI.php" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
     <SOAP-ENV:Body>
         <ns1:getMusicLikeTitleResponse>
-            <return xsi:type="xsd:string">{"data":"[{"data":"[{\"id\":1,\"abcNotation\":\"[string]\",\"userID\":2,\"musicTitle\":\"[string]\",\"pdfUrl\":null}, {\"id\":3,\"abcNotation\":\"[string]\",\"userID\":4,\"musicTitle\":\"[string]\",\"pdfUrl\":null}]"}]"}</return>
+            <return xsi:type="xsd:string">{"data":[{"id":1,"abcNotation":"...","userID":1,"musicTitle":"Title","pdfUrl":"..."},{"id":2,"abcNotation":"...","userID":2,"musicTitle":"Title","pdfUrl":null}]}</return>
         </ns1:getMusicLikeTitleResponse>
     </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>

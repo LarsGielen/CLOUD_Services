@@ -20,7 +20,7 @@ class SoapService {
             musicTitle: $musicTitle,
         ));
         
-        return json_encode([ 'data' => SheetMusic::sheetMusicListToJson((new DatabaseHandler())->getSheetMusicById($id))]);
+        return json_encode([ 'data' => SheetMusic::sheetMusicList((new DatabaseHandler())->getSheetMusicById($id))]);
     }
 
     /**
@@ -30,7 +30,7 @@ class SoapService {
      */
     function getMusic()
     {
-        return json_encode([ 'data' => SheetMusic::sheetMusicListToJson((new DatabaseHandler())->getAllSheetMusic())]);
+        return json_encode([ 'data' => SheetMusic::sheetMusicList((new DatabaseHandler())->getAllSheetMusic())]);
     }
 
     /**
@@ -41,7 +41,7 @@ class SoapService {
      */
     function getMusicByID($id)
     {
-        return json_encode(['data' => SheetMusic::sheetMusicListToJson((new DatabaseHandler())->getSheetMusicById($id))]);
+        return json_encode(['data' => SheetMusic::sheetMusicList((new DatabaseHandler())->getSheetMusicById($id))]);
     }
 
     /**
@@ -52,7 +52,7 @@ class SoapService {
      */
     function getMusicByUserID($userID)
     {
-        return json_encode(['data' => SheetMusic::sheetMusicListToJson((new DatabaseHandler())->getSheetMusicByUserID($userID))]);
+        return json_encode(['data' => SheetMusic::sheetMusicList((new DatabaseHandler())->getSheetMusicByUserID($userID))]);
     }
 
     /**
@@ -63,7 +63,7 @@ class SoapService {
      */
     function getMusicByTitle($musicTitle)
     {
-        return json_encode(['data' => SheetMusic::sheetMusicListToJson((new DatabaseHandler())->getSheetMusicByTitle($musicTitle))]);
+        return json_encode(['data' => SheetMusic::sheetMusicList((new DatabaseHandler())->getSheetMusicByTitle($musicTitle))]);
     }
 
     /**
@@ -73,7 +73,7 @@ class SoapService {
      */
     function getMusicLikeTitle($musicTitle)
     {
-        return json_encode(['data' => SheetMusic::sheetMusicListToJson((new DatabaseHandler())->getSheetMusicByTitleLike($musicTitle))]);
+        return json_encode(['data' => SheetMusic::sheetMusicList((new DatabaseHandler())->getSheetMusicByTitleLike($musicTitle))]);
     }
 
     /**

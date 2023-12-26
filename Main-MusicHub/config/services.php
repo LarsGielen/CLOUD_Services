@@ -31,4 +31,8 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'sheetmusicAPI'=> [
+        'url' => "http://localhost:5050",
+        'wsdl' => "http://localhost:5050/SheetMusicAPI.php?wsdl",
+    ],
 ];

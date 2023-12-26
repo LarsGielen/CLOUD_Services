@@ -11,7 +11,9 @@
                     <option>Alphabetical</option>
                     <option>Price</option>
                     <option>Date</option>
+                    @Auth
                     <option>My booked events</option>
+                    @endAuth
                 </x-slot>
             </x-combobox>
         </div>

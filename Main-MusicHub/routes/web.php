@@ -3,6 +3,7 @@
 use App\Http\Controllers\InstrumentController;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SheetMusicController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,11 +32,17 @@ Route::get('/instruments/{id}', [InstrumentController::class, 'show'])->name('in
 
 // Event Booking API - REST
 Route::get('/events', [EventsController::class, 'index'])->name('events.index');
-Route::post('/events/filter', [EventsController::class, 'filter'])->name('events.filter');
+Route::post('/events', [EventsController::class, 'filter'])->name('events.filter');
 Route::get('/events/{id}', [EventsController::class, 'showEvent'])->name('events.show.event');
 Route::get('/events/locations/{id}', [EventsController::class, 'showLocation'])->name('events.show.location');
 Route::get('/events/organizers/{id}', [EventsController::class, 'showOrganizer'])->name('events.show.organizer');
 Route::post('/events/book', [EventsController::class, 'book'])->name('events.book')->middleware('auth');
+
+// Sheet Music API - SOAP
+Route::get('/sheetmusic', [SheetMusicController::class, 'index'])->name('sheetmusic.index');
+Route::post('/sheetmusic', [SheetMusicController::class, 'filter'])->name('sheetmusic.filter');
+Route::get('/sheetmusic/{id}', [SheetMusicController::class, 'show'])->name('sheetmusic.show');
+Route::get('/sheetmusic/pdf/{id}', [SheetMusicController::class, 'generatePDF'])->name('sheetmusic.generatePDF');
 
 Route::middleware('auth')->group(function () {
 
