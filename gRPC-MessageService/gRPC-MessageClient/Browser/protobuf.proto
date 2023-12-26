@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package messageservice;
+
+import "google/protobuf/timestamp.proto";
+
+service MessageService {
+  // Unary RPC for sending a message from client to server
+  rpc sendMessageToUser(ClientMessage) returns (StatusResponse);
+
+  // serverside stream rpc to send messages to the client
+  rpc openMessageStream(User) returns (stream StreamMessage);
+}
+
+message User {
+  int32 userID = 1;
+  optional string userName = 2;
+}
+
+message StatusResponse {
+  string message = 1;
+  Status status = 2;
+}
+
+enum Status {
+  DEBUG = 0;
+  OK = 1;
+  INFO = 2;
+  WARNING = 3;
+  ERROR = 4;
+}
+
+message ClientMessage {
+  string Message = 1;
+  User sendingUser = 2;
+  User receivingUser = 3;
+}
+
+message StreamMessage {
+  string message = 1;
+  Status status= 2;
+  User sender = 3;
+  google.protobuf.Timestamp Timestamp = 4;
+}

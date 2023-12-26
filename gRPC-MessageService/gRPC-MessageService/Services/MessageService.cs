@@ -52,7 +52,7 @@ public class MessageServiceImplementation : MessageService.MessageServiceBase
             Status = Status.Ok,
             Message = message.Message,
             Sender = message.SendingUser,
-            Timestamp = Timestamp.FromDateTime(DateTime.Now)
+            Timestamp = Timestamp.FromDateTimeOffset(DateTimeOffset.Now)
         });
 
         return Task.FromResult(new StatusResponse

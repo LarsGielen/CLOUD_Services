@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>gRPC-Web</title>
+</head>
+<body>
+    <h2>gRPC-Web</h2>
+    <div>
+        <div>
+            <label>Sender ID:</label>
+            <input id="senderID" type="text"/>
+        </div>
+
+        <div>
+            <label>Sender userName:</label>
+            <input id="username" type="text"/>
+        </div>
+
+        <input id="connect" type="button" value="Connect"/>
+        <br>
+
+        <div>
+            <label>Receiver ID:</label>
+            <input id="receiverID" type="text"/>
+        </div>
+        
+        <div>
+            <label>Message:</label>
+            <input id="message" type="text"/>
+        </div>
+
+        <input id="send" type="button" value="Send Message"/>
+    </div>
+    <div id="output">
+        
+    </div>
+
+    <script type="text/javascript" src="./dist/main.js"></script>
+</body>
+</html>

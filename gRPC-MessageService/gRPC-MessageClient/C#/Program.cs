@@ -4,7 +4,7 @@ using Grpc.Net.Client;
 using MessageServiceClient;
 
 // The port number must match the port of the gRPC server.
-using var channel = GrpcChannel.ForAddress("http://localhost:5177");
+using var channel = GrpcChannel.ForAddress("http://localhost:6061");
 var client = new MessageService.MessageServiceClient(channel);
 
 // Get user information from the console and create user
