@@ -32,6 +32,11 @@
                     <x-nav-link :href="route('sheetmusic.index')" :active="request()->routeIs('sheetmusic.index')">
                         {{ __('Sheet Music') }}
                     </x-nav-link>
+
+                    <!-- Message page -->
+                    <x-nav-link :href="route('messages.index')" :active="request()->routeIs('messages.index')">
+                        {{ __('Messages') }}
+                    </x-nav-link>
                 </div>
             </div>
 

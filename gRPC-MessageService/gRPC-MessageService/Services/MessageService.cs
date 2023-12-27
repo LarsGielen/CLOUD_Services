@@ -20,21 +20,12 @@ public class MessageServiceImplementation : MessageService.MessageServiceBase
             Receiver = new UserInfo { UserID = message.ReceivingUser.UserID, Username = message.ReceivingUser.UserName}
         });
 
-        // check if both users have an open stream
-        if (!connectedClients.ContainsKey(message.SendingUser.UserID)) {
-            return Task.FromResult(new StatusResponse
-            {
-                Status = Status.Warning,
-                Message = "Client needs to have an open stream to sent messages"
-            });
-        }
-
+        // check if receiver has an open stream
         if (!connectedClients.ContainsKey(message.ReceivingUser.UserID)) {
-            // receiving user is not connected
             return Task.FromResult(new StatusResponse
             {
                 Status = Status.Debug,
-                Message = "Dit moet nog veranderd worden"
+                Message = "Receiver doesnot have an open stream"
             });
         }
 
@@ -44,7 +35,7 @@ public class MessageServiceImplementation : MessageService.MessageServiceBase
             return Task.FromResult(new StatusResponse
             {
                 Status = Status.Error,
-                Message = "Cant load receiving client"
+                Message = "Can't load receiving client"
             });
         }
 
@@ -79,7 +70,7 @@ public class MessageServiceImplementation : MessageService.MessageServiceBase
                 Status = Status.Warning, 
                 Message = "Client already has an open stream",
                 Sender = new User { UserID = -1, UserName = "Server"},
-                Timestamp = Timestamp.FromDateTime(DateTime.Now)
+                Timestamp = Timestamp.FromDateTimeOffset(DateTimeOffset.Now)
             });
 
             return;

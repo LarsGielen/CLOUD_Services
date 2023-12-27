@@ -74,13 +74,13 @@ function filterInstrumentTypes(parent, args) {
 // Resolvers for type defentitions
 userResolver = {
     instrumentsForSale: (parent) => {
-        return InstrumentPosts.filter(instrumentPost => instrumentPost.sellerUserName == parent.userName);
+        return InstrumentPosts.filter(instrumentPost => instrumentPost.sellerUserID == parent.userID);
     },
 }
 
 instrumentPostResolver = {
     seller: (parent) => {
-        return Users.find(user => user.userName == parent.sellerUserName);
+        return Users.find(user => user.userID == parent.sellerUserID);
     },
 
     location: (parent) => {

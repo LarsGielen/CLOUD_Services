@@ -10,7 +10,7 @@
         <div class="flex justify-end gap-4">
             <h1 class="text-3xl font-bold flex-grow">{{ $post->title }}</h1>
             <b class="text-3xl font-bold text-red-500">Buy for €{{ $post->price }}</b>
-            <x-primary-button class="flex-none">
+            <x-primary-button id="openModalButton" class="flex-none">
                 {{ ('Contact seller') }}
             </x-primary-button>
         </div>
@@ -76,4 +76,5 @@
         </div>
     </div>
 
+    @include('Instruments.Partials.messageModal')
 </x-app-layout>

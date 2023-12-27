@@ -6,7 +6,7 @@
             <x-input-label for="Title" value="Seach by title:" class="text-xl"/>
             <div class="flex gap-4">
                 <x-text-input id="title" name="title" type="text" value="{{ $searchTitle }}" class="w-full"/>
-                <x-secondary-button>
+                <x-secondary-button type="submt">
                     {{ "Search" }}
                 </x-secondary-button>
             </div>

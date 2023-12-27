@@ -15,7 +15,7 @@
                     <h1 class="text-3xl font-bold ">{{ $SheetMusic->musicTitle }}</h1>
                     <b> by {{ $SheetMusic->username }}</b>
                 </div>
-                <x-primary-button class="flex-none">
+                <x-primary-button class="flex-none" id="openModalButton">
                     {{ ('Contact componist') }}
                 </x-primary-button>
                 <x-primary-button class="flex-none" x-data="" x-on:click.prevent="$dispatch('open-modal', 'getPDFModal')">
@@ -53,5 +53,6 @@
     </div>
 
     @include('SheetMusic.Partials.pdfmodal')
+    @include('SheetMusic.Partials.messagemodal')
 
 </x-app-layout>

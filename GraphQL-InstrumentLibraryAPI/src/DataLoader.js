@@ -26,7 +26,7 @@ function loadInstrumentPosts() {
             condition: row.condition,
             price: parseFloat(row.price),
             location: row.location,
-            sellerUserName: row.seller
+            sellerUserID: row.sellerUserID
         });
     })
     
@@ -49,6 +49,7 @@ function loadUsers() {
     const Users = [];
     loadData("Users", (row) => {
         Users.push({
+            userID: row.userID,
             userName: row.userName,
             email: row.email,
         });

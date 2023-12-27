@@ -63,13 +63,13 @@ Install the generator for gRPC-Web [here](https://github.com/grpc/grpc-web/relea
 Run the following command to generate the files:
 
 ```command
-protoc -I="." protobuf.proto  --js_out=import_style=commonjs:"." --grpc-web_out=import_style=commonjs,mode=grpcwebtext:"."
+protoc -I="./Proto" ./Proto/protobuf.proto --js_out=import_style=commonjs:"./src" --grpc-web_out=import_style=commonjs,mode=grpcwebtext:"./src"
 ```
 
-Compile client side code:
+The GrpcClient.js file needs to be compiled to a library, this way other scripts inside the browser can use its functions. To do this run the following command:
 
 ```console
-npx webpack ./index.js
+npx webpack 
 ```
 
 Run client:

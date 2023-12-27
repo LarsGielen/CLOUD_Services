@@ -144,37 +144,38 @@ class InstrumentController extends Controller
     public function show(string $id): View
     {
         $query = "
-        query {
-            instrumentPostwithID(id: $id) {
-              id
-              title
-              price
-              description
-              condition
-              age
-              type {
-                name
-                family
-                instrumentsForSale {
-                    id
-                    title
-                    price
+            query {
+                instrumentPostwithID(id: 1) {
+                id
+                title
+                price
+                description
+                condition
+                age
+                type {
+                    name
+                    family
+                    instrumentsForSale {
+                        id
+                        title
+                        price
+                    }
                 }
-              }
-              location {
-                city
-              }
-              seller {
-                userName
-                email
-                instrumentsForSale {
-                    id
-                    title
-                    price
+                location {
+                    city
                 }
-              }
+                seller {
+                    userName
+                    userID
+                    email
+                    instrumentsForSale {
+                        id
+                        title
+                        price
+                    }
+                }
+                }
             }
-          }
         ";
 
         $response = Http::withHeaders([
@@ -186,7 +187,8 @@ class InstrumentController extends Controller
         $instrumentPost = json_decode($response)->data->instrumentPostwithID;
 
         return view('Instruments.detail', [
-            'post'=> $instrumentPost
+            'post'=> $instrumentPost,
+            'messageServerUrl' => config('services.MessageService.url')
         ]);
     }
 }

@@ -1,10 +1,12 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\InstrumentController;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SheetMusicController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +30,7 @@ Route::get('/home', function () {
 // Instrument Library API- GraphQL
 Route::get('/instruments', [InstrumentController::class, 'index'])->name('instruments.index');
 Route::post('/instruments', [InstrumentController::class, 'filter'])->name('instruments.filter');
-Route::get('/instruments/{id}', [InstrumentController::class, 'show'])->name('instruments.show');
+Route::get('/instruments/{id}', [InstrumentController::class, 'show'])->name('instruments.show')->middleware('auth');;
 
 // Event Booking API - REST
 Route::get('/events', [EventsController::class, 'index'])->name('events.index');
@@ -41,8 +43,11 @@ Route::post('/events/book', [EventsController::class, 'book'])->name('events.boo
 // Sheet Music API - SOAP
 Route::get('/sheetmusic', [SheetMusicController::class, 'index'])->name('sheetmusic.index');
 Route::post('/sheetmusic', [SheetMusicController::class, 'filter'])->name('sheetmusic.filter');
-Route::get('/sheetmusic/{id}', [SheetMusicController::class, 'show'])->name('sheetmusic.show');
-Route::get('/sheetmusic/pdf/{id}', [SheetMusicController::class, 'generatePDF'])->name('sheetmusic.generatePDF');
+Route::get('/sheetmusic/{id}', [SheetMusicController::class, 'show'])->name('sheetmusic.show')->middleware('auth');
+Route::get('/sheetmusic/pdf/{id}', [SheetMusicController::class, 'generatePDF'])->name('sheetmusic.generatePDF')->middleware('auth');
+
+// Message Service (gRPC)
+Route::get('/messages', [MessageController::class, 'index'])->name('messages.index')->middleware('auth');
 
 Route::middleware('auth')->group(function () {
 

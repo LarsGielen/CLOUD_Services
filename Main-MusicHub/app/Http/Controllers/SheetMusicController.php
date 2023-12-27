@@ -59,7 +59,8 @@ class SheetMusicController extends Controller
 
         return view("SheetMusic.detail", [
             "SheetMusic"=> $data,
-            "sheetMusicfromComposer" => $otherMusicFromUser
+            "sheetMusicfromComposer" => $otherMusicFromUser,
+            "messageServerUrl" => config("services.MessageService.url")
         ]);
     }
 

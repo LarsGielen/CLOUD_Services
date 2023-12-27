@@ -177,7 +177,7 @@ class DatabaseHandler
                         UserID = reader.GetInt32(reader.GetOrdinal("ReceiverId")),
                         Username = reader.GetString(reader.GetOrdinal("ReceiverUsername"))
                     },
-                    TimeOfSend = reader.GetDateTime(reader.GetOrdinal("Timestamp"))
+                    TimeOfSend = reader.GetDateTimeOffset(reader.GetOrdinal("Timestamp"))
                 });
             }
         }

@@ -2,7 +2,7 @@
     "name": "grpc-web-client",
     "version": "0.1.0",
     "description": "grpc-web-client",
-    "main": "index.js",
+    "main": "GrpcClient.js",
     "devDependencies": {
         "@grpc/grpc-js": "^1.9.13",
         "@grpc/proto-loader": "~0.5.4",

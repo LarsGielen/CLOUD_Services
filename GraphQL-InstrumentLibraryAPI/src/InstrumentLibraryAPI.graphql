@@ -40,6 +40,9 @@ type Query {
 }
 
 type User {
+  "The id of the user"
+  userID: Int!
+
   "The username of the user"
   userName: String!
 

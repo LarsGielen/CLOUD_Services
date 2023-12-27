@@ -1,4 +1,2 @@
-userName,email
-Lars_Gielen,lars@example.com
-emma_smith,emma@example.com
-david_jones,david@example.com
+userID,userName,email
+1,Admin,admin@admin.com

@@ -35,4 +35,8 @@ return [
         'url' => "http://localhost:5050",
         'wsdl' => "http://localhost:5050/SheetMusicAPI.php?wsdl",
     ],
+
+    'MessageService'=> [
+        'url' => "http://localhost:6060",
+    ],
 ];
