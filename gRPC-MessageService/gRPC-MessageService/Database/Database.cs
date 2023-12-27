@@ -6,6 +6,39 @@ class DatabaseHandler
 {
     private string databaseLocation = "Data Source=Database/database.db";
 
+    public DatabaseHandler() {
+        InitDatabase();
+    }
+
+    private void InitDatabase() {
+        if (!File.Exists("Database/database.db"))
+        {
+            using (var connection = new SqliteConnection(databaseLocation))
+            {
+                connection.Open();
+
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = @"
+                        CREATE TABLE Messages (
+                            Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                            MessageText TEXT,
+                            SenderId INTEGER,
+                            SenderUsername TEXT,
+                            ReceiverId INTEGER,
+                            ReceiverUsername TEXT,
+                            Timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+                        );
+                    ";
+
+                    command.ExecuteNonQuery();
+                }
+
+                connection.Close();
+            }
+        }
+    }
+
     public void InsertMessage(MessageInfo messageInfo)
     {
         using (var connection = new SqliteConnection(databaseLocation))
@@ -42,7 +75,7 @@ class DatabaseHandler
             // Retrieve messages with a specific receiver
             using (var command = connection.CreateCommand())
             {
-                command.CommandText = "SELECT * FROM Messages WHERE ReceiverId = @receiverId";
+                command.CommandText = "SELECT * FROM Messages WHERE ReceiverId = @receiverId ORDER BY Timestamp";
                 command.Parameters.AddWithValue("@receiverId", receiverId);
 
                 messages = MessagesCommandToList(command);
@@ -65,7 +98,7 @@ class DatabaseHandler
             // Retrieve messages with a specific sender
             using (var command = connection.CreateCommand())
             {
-                command.CommandText = "SELECT * FROM Messages WHERE SenderId = @senderId";
+                command.CommandText = "SELECT * FROM Messages WHERE SenderId = @senderId ORDER BY Timestamp";
                 command.Parameters.AddWithValue("@senderId", senderId);
 
                 messages = MessagesCommandToList(command);
@@ -76,6 +109,30 @@ class DatabaseHandler
 
         return messages;
     }
+
+    public List<MessageInfo> GetMessagesByUser(int userId)
+    {
+        List<MessageInfo> messages = new List<MessageInfo>();
+
+        using (var connection = new SqliteConnection(databaseLocation))
+        {
+            connection.Open();
+
+            // Retrieve messages with a specific user as either sender or receiver
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = "SELECT * FROM Messages WHERE SenderId = @userId OR ReceiverId = @userId ORDER BY Timestamp";
+                command.Parameters.AddWithValue("@userId", userId);
+
+                messages = MessagesCommandToList(command);
+            }
+
+            connection.Close();
+        }
+
+        return messages;
+    }
+
 
     public List<MessageInfo> GetMessagesBySenderAndReceiver(int senderId, int receiverId)
     {
@@ -88,7 +145,7 @@ class DatabaseHandler
             // Retrieve messages with a specific sender and receiver
             using (var command = connection.CreateCommand())
             {
-                command.CommandText = "SELECT * FROM Messages WHERE SenderId = @senderId AND ReceiverId = @receiverId";
+                command.CommandText = "SELECT * FROM Messages WHERE SenderId = @senderId AND ReceiverId = @receiverId ORDER BY Timestamp";
                 command.Parameters.AddWithValue("@senderId", senderId);
                 command.Parameters.AddWithValue("@receiverId", receiverId);
 

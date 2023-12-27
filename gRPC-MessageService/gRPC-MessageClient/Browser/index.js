@@ -1,7 +1,8 @@
-const {ClientMessage, Status, StatusResponse, StreamMessage, User} = require('./protobuf_pb.js');
-const {MessageServiceClient} = require('./protobuf_grpc_web_pb.js');
+// main.js
 
-var client = new MessageServiceClient('http://localhost:6060');
+const GrpcMessageClient = require('./GrpcClient.js');
+
+var grpcMessageClient = new GrpcMessageClient('http://localhost:6060');
 
 var senderIDInput = document.querySelector("#senderID");
 var usernameInput = document.querySelector("#username");
@@ -13,48 +14,34 @@ var sendButton = document.querySelector("#send");
 
 var output = document.querySelector("#output");
 
-connectButton.onclick= function () {
+connectButton.onclick = function () {
+    grpcMessageClient.connectToMessageStream (
+        senderIDInput.value,
+        usernameInput.value,
+        (data) => {
+            console.log('Received message:', data.getMessage());
+            console.log('Status:', data.getStatus());
+            console.log('Sender:', data.getSender().getUserid());
+            console.log('Timestamp:', data.getTimestamp());
 
-    var sendingUser = new User();
-    sendingUser.setUserid( senderIDInput.value );
-    sendingUser.setUsername( usernameInput.value );
-
-    var stream = client.openMessageStream(sendingUser);
-
-    stream.on('data', (response) => {
-        console.log('Received message:', response.getMessage());
-        console.log('Status:', response.getStatus());
-        console.log('Sender:', response.getSender().getUserid());
-        console.log('Timestamp:', response.getTimestamp());
-
-        var paragraph = document.createElement('p');
-        paragraph.textContent = response.getSender().getUsername() + ": " + response.getMessage();
-        output.appendChild(paragraph);
-    });
-
-    // Handle stream close or errors
-    stream.on('end', function () {
-        console.log('Stream ended');
-    });
-
-    stream.on('error', function (err) {
-        console.error('Stream error:', err);
-    });
+            var paragraph = document.createElement('p');
+            paragraph.textContent = data.getSender().getUsername() + ": " + data.getMessage();
+            output.appendChild(paragraph);
+        },
+        ()    => console.log('Stream ended'),
+        (error) => console.error('Stream error:', error)
+    );
 }
 
-sendButton.onclick = function() {
-    
-    var sendingUser = new User();
-    sendingUser.setUserid( senderIDInput.value );
-    sendingUser.setUsername( usernameInput.value );
+sendButton.onclick = function () {
+    grpcMessageClient.sendMessage(
+        senderIDInput.value,
+        usernameInput.value,
+        receiverIDInput.value,
+        messageInput.value
+    );
 
-    var receivingUser = new User();
-    receivingUser.setUserid( receiverIDInput.value );
-
-    var message = new ClientMessage();
-    message.setMessage(messageInput.value);
-    message.setSendinguser( sendingUser );
-    message.setReceivinguser( receivingUser );
-
-    client.sendMessageToUser(message);
+    var paragraph = document.createElement('p');
+    paragraph.textContent = usernameInput.value+ ": " + messageInput.value;
+    output.appendChild(paragraph);
 }

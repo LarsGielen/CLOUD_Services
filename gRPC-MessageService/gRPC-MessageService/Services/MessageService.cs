@@ -102,7 +102,7 @@ public class MessageServiceImplementation : MessageService.MessageServiceBase
         Console.ForegroundColor = ConsoleColor.White;
 
         // send all stored messages
-        var storedMessages = new DatabaseHandler().GetMessagesByReceiver(user.UserID);
+        var storedMessages = new DatabaseHandler().GetMessagesByUser(user.UserID);
         storedMessages.ForEach ( async messageInfo => {
             await responseStream.WriteAsync( new StreamMessage {
                 Status = Status.Ok,
