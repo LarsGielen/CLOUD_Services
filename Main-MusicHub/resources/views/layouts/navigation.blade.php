@@ -37,6 +37,11 @@
                     <x-nav-link :href="route('messages.index')" :active="request()->routeIs('messages.index')">
                         {{ __('Messages') }}
                     </x-nav-link>
+
+                    <!-- Music Session page -->
+                    <x-nav-link :href="route('musicSession.join')" :active="request()->routeIs('musicSession.join')">
+                        {{ __('Music Session') }}
+                    </x-nav-link>
                 </div>
             </div>
 

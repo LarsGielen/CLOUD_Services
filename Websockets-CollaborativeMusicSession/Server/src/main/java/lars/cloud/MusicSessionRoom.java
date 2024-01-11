@@ -21,6 +21,17 @@ public class MusicSessionRoom {
         this.roomName = roomName;
         userAmount = 0;
         System.out.println("New Room created: " + roomName);
+        sharedText.append(
+            "X: 1\n" + //
+            "M: 4/4\n" + //
+            "L: 1/8\n" + //
+            "R: reel\n" + //
+            "K: Emin\n" + //
+            "|:D2|EB{c}BA B2 EB|~B2 AB dBAG|FDAD BDAD|FDAD dAFD|\n" + //
+            "EBBA B2 EB|B2 AB defg|afe^c dBAF|DEFD E2:|\r\n" + //
+            "|:gf|eB B2 efge|eB B2 gedB|A2 FA DAFA|A2 FA defg|\n" + //
+            "eB B2 eBgB|eB B2 defg|afe^c dBAF|DEFD E2:|\n"
+        );
     }
 
     public void addUser(User user) throws IOException {

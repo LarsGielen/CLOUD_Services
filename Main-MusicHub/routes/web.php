@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MusicSessionController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\InstrumentController;
@@ -48,6 +49,9 @@ Route::get('/sheetmusic/pdf/{id}', [SheetMusicController::class, 'generatePDF'])
 
 // Message Service (gRPC)
 Route::get('/messages', [MessageController::class, 'index'])->name('messages.index')->middleware('auth');
+
+// Music Session Service (Websockets)
+Route::get('/musicsession/join', [MusicSessionController::class, 'join'])->name('musicSession.join');
 
 Route::middleware('auth')->group(function () {
 

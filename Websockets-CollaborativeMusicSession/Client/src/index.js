@@ -33,9 +33,15 @@ window.onload = function() {
     disConnectButton.disabled = true;
 
     joinField.disabled = true;
-    inputField.disabled = true;
+    inputField.disabled = false;
     joinButton.disabled = true;
     leaveButton.disabled = true;
+
+    new ABCJS.Editor("inputField", { 
+        canvas_id: "notation",
+        generate_warnings: true,
+        warnings_id:"warnings"
+    });
 }
 
 function sendMessage(status) {
