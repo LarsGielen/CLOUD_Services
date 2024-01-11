@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Music Session Client</title>
+    <script src="/src/MusicSessionClient.js"></script>
+    <script src="/src/index.js"></script>
+</head>
+<body>
+    <h2>Music Session Client</h2>
+    
+    <div>
+        <div>
+            <label for="connect">WebSocket connection:</label>
+            <input id="connectBtn" type="button" value="Connect"/>
+            <input id="disconnectBtn" type="button" value="Disconnect"/>
+        </div>
+    
+        <div>
+            <label for="joinField">Join room:</label>
+            <input id="joinField" type="text"/>
+            <input id="joinBtn" type="button" value="Join"/>
+            <input id="leaveBtn" type="button" value="Leave"/>
+        </div>
+    
+        <br>
+
+        <div>
+            <textarea id="inputField"></textarea>
+        </div>
+    </div>
+</body>
+</html>
