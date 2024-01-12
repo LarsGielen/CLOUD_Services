@@ -1,0 +1,8 @@
+{
+  "name": "Tuner Service Client",
+  "version": "1.0.0",
+  "author": "Lars Gielen",
+  "dependencies": {
+    "mqtt": "^5.3.4"
+  }
+}
