@@ -66,6 +66,8 @@ type Mutation {
     "The username of the seller of the instrument"
     seller: UserInput!
   ) : InstrumentPost!
+
+  deleteInstrumentPost(postID : Int!) : InstrumentPost
 }
 
 type User {

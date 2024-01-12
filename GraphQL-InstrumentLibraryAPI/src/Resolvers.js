@@ -74,6 +74,7 @@ function filterInstrumentTypes(parent, args) {
 // Mutation Resolvers
 const mutationResolver = {
     createInstrumentPost: createInstrumentPost,
+    deleteInstrumentPost: deleteInstrumentPost,
 }
 
 function createInstrumentPost(parent, args) {
@@ -101,6 +102,18 @@ function createInstrumentPost(parent, args) {
     }
 
     InstrumentPosts.push(post);
+    return post;
+}
+
+function deleteInstrumentPost(parent, args) {
+    let index = InstrumentPosts.findIndex((post) => post.id === args.postID);
+
+    if (index == -1) {
+        return null;
+    }
+
+    var post = InstrumentPosts.at(index);
+    InstrumentPosts.splice(index, 1);
     return post;
 }
 
