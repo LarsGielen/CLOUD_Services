@@ -79,7 +79,7 @@ const mutationResolver = {
 
 function createInstrumentPost(parent, args) {
     var seller = {
-        userID: args.seller.userID,
+        userID: parseInt(args.seller.userID),
         userName: args.seller.userName,
         email: args.seller.email,
     }
@@ -87,12 +87,13 @@ function createInstrumentPost(parent, args) {
     var post = {
         id: InstrumentPosts.length + 1,
         title: args.title,
+        imageUrl: args.imageUrl,
         description: args.description,
-        type: InstrumentTypes.findIndex((type) => type.name == args.type),
+        type: args.type,
         age: parseFloat(args.age),
         condition: args.condition,
         price: parseFloat(args.price),
-        location: args.location,
+        location: args.location.city,
         sellerUserID: seller.userID
     }
 

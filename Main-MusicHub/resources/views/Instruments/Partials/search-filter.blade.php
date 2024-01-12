@@ -1,4 +1,4 @@
-<form method="post" action="{{ route('instruments.filter') }}" class="m-12">
+<form method="post" action="{{ route('instruments.filter') }}">
     @csrf
 
     <div class="flex gap-4 bg-white shadow-sm rounded-lg p-4">
@@ -42,7 +42,7 @@
                     <?php echo ($selectedFilters['instrumentType'] == 'All') ? 'selected' : ''; ?>>
                         all
                     </option>
-                    @foreach ($instrumentTypes as $instrumentType)
+                    @foreach ($filteredinstrumentTypes as $instrumentType)
                     <option value="{{$instrumentType->name}}" class="lowercase"
                     <?php echo ($selectedFilters['instrumentType'] == $instrumentType->name) ? 'selected' : ''; ?>>
                         {{$instrumentType->name}}

@@ -9,15 +9,18 @@
     <div class="bg-white shadow-sm sm:rounded-lg p-6 mx-12 my-4">
         <div class="flex justify-end gap-4">
             <h1 class="text-3xl font-bold flex-grow">{{ $post->title }}</h1>
-            <b class="text-3xl font-bold text-red-500">Buy for €{{ $post->price }}</b>
-            <x-primary-button id="openModalButton" class="flex-none">
-                {{ ('Contact seller') }}
-            </x-primary-button>
+            @if ($post->seller->userID == auth()->user()->id)
+
+                <a href="{{ route('instruments.delete', ['id' => $post->id])}}"><x-primary-button><p class="text-red-400">Remove instrument</p></x-primary-button></a>
+            @else
+                <b class="text-3xl font-bold text-red-500">Buy for €{{ $post->price }}</b>
+                <x-primary-button id="openModalButton" class="flex-none">Contact seller</x-primary-button>
+            @endif
         </div>
         <br>
         <div class="flex gap-4">
             <div>
-                <img class="object-cover size-56 rounded-md" src="https://placekitten.com/300/200">
+                <img class="object-cover size-56 rounded-md" src="{{$post->imageUrl}}">
             </div>
             <div class="flex flex-col">
                 <div class="grow">
@@ -48,7 +51,7 @@
         @foreach ($post->type->instrumentsForSale as $instrumentPost)
             @if($instrumentPost->id !== $post->id)
             <x-list-item 
-                imageURL="https://placekitten.com/300/200"
+                imageURL="{{$instrumentPost->imageUrl}}"
                 title="{{$instrumentPost->title}}"
                 info="Price: €{{$instrumentPost->price}}"
                 buttonText="Details"
@@ -65,7 +68,7 @@
         @foreach ($post->seller->instrumentsForSale as $instrumentPost)
             @if($instrumentPost->id !== $post->id)
             <x-list-item
-                imageURL="https://placekitten.com/300/200"
+                imageURL="{{$instrumentPost->imageUrl}}"
                 title="{{$instrumentPost->title}}"
                 info="Price: €{{$instrumentPost->price}}"
                 buttonText="Details"

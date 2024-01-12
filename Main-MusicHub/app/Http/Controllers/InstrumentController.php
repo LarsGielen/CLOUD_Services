@@ -5,12 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Auth;
 
 class InstrumentController extends Controller
 {
-    /**
-     * Show the instrument index view.
-     */
     public function index(): View
     {
         $selectedFilters = array (
@@ -29,11 +27,12 @@ class InstrumentController extends Controller
                     id
                     title
                     price
+                    imageUrl
                 }
             }
         EOD;
 
-        $instrumentTypes = <<<'EOD'
+        $filteredinstrumentTypes = <<<'EOD'
             query {
                 instrumentTypes {
                     name
@@ -50,16 +49,17 @@ class InstrumentController extends Controller
         $instrumentTypeResponse = Http::withHeaders([
             'Content-Type' => 'application/json',
         ])->post('http://localhost:4000/', [
-            'query' => $instrumentTypes
+            'query' => $filteredinstrumentTypes
         ]);
         
         $instrumentPosts = json_decode($instrumentResponse)->data->instrumentPosts;
-        $instrumentTypes = json_decode($instrumentTypeResponse)->data->instrumentTypes;
+        $filteredinstrumentTypes = json_decode($instrumentTypeResponse)->data->instrumentTypes;
 
         return view('Instruments.search', [
             'instrumentPosts' => $instrumentPosts,
-            'instrumentTypes' => $instrumentTypes,
-            'selectedFilters' => $selectedFilters
+            'filteredinstrumentTypes' => $filteredinstrumentTypes,
+            'instrumentTypes' => $filteredinstrumentTypes,
+            'selectedFilters' => $selectedFilters,
         ]);
     }
 
@@ -87,10 +87,10 @@ class InstrumentController extends Controller
             'variables' => $instrumentTypeVariables
         ]);
 
-        $instrumentTypes = json_decode($instrumentTypeResponse, false)->data->filterInstrumentTypes;
+        $filteredinstrumentTypes = json_decode($instrumentTypeResponse, false)->data->filterInstrumentTypes;
 
         $found = false;
-        foreach ($instrumentTypes as $instrument) {
+        foreach ($filteredinstrumentTypes as $instrument) {
             if ($instrument->name === $selectedFilters['instrumentType']) {
                 $found = true;
                 break;
@@ -100,6 +100,19 @@ class InstrumentController extends Controller
             $selectedFilters['instrumentType'] = "All";
         }
 
+        $instrumentTypes = <<<'EOD'
+            query {
+                instrumentTypes {
+                    name
+                }
+            }
+        EOD;
+        $instrumentTypeResponse = Http::withHeaders([
+            'Content-Type' => 'application/json',
+        ])->post('http://localhost:4000/', [
+            'query' => $instrumentTypes
+        ]);
+
         // Get InstrumentPosts
         $instrumentQuery = <<<'EOD'
             query($instrumentFamily: InstrumentFamily, $instrumentType: String, $priceMin: Int, $priceMax: Int, $condition: InstrumentCondition, $locationName: String, $sellerUserName: String) {
@@ -107,6 +120,7 @@ class InstrumentController extends Controller
                     id
                     title
                     price
+                    imageUrl
                 }
             }
         EOD;
@@ -133,32 +147,109 @@ class InstrumentController extends Controller
         // Return view
         return view('Instruments.search', [
             'instrumentPosts' => $instrumentPosts,
+            'filteredinstrumentTypes' => $filteredinstrumentTypes,
             'instrumentTypes' => $instrumentTypes,
             'selectedFilters' => $selectedFilters
         ]);
     }
 
-    /**
-     * Shows an instrument in detail
-     */
     public function show(string $id): View
     {
-        $query = "
-            query {
-                instrumentPostwithID(id: 1) {
+        $query = <<<'EOD'
+            query ($instrumentPostwithIdId: ID!) {
+                instrumentPostwithID(id: $instrumentPostwithIdId) {
+                    id
+                    title
+                    price
+                    description
+                    imageUrl
+                    condition
+                    age
+                    type {
+                        name
+                        family
+                        instrumentsForSale {
+                            id
+                            title
+                            price
+                            imageUrl
+                        }
+                    }
+                    location {
+                        city
+                    }
+                    seller {
+                        userName
+                        userID
+                        email
+                        instrumentsForSale {
+                            id
+                            title
+                            price
+                            imageUrl
+                        }
+                    }
+                }
+            }
+        EOD;;
+
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+        ])->post('http://localhost:4000/', [
+            'query' => $query,
+            'variables' => array("instrumentPostwithIdId" => $id)
+        ]);
+
+        $instrumentPost = json_decode($response)->data->instrumentPostwithID;
+
+        return view('Instruments.detail', [
+            'post'=> $instrumentPost,
+            'messageServerUrl' => config('services.MessageService.url')
+        ]);
+    }
+
+    public function create(Request $request): View
+    {
+        $postOptions = $request->post();
+
+        $instrumentQuery = <<<'EOD'
+            mutation (
+                $title: String!
+                $description: String!
+                $imageUrl: String!
+                $type: String!
+                $age: Int!
+                $condition: InstrumentCondition!
+                $price: Float!
+                $location: LocationInput!
+                $seller: UserInput!
+            ) {
+                createInstrumentPost(
+                title: $title
+                description: $description
+                imageUrl: $imageUrl
+                type: $type
+                age: $age
+                condition: $condition
+                price: $price
+                location: $location
+                seller: $seller
+                ) {
                 id
                 title
                 price
                 description
+                imageUrl
                 condition
                 age
                 type {
                     name
                     family
                     instrumentsForSale {
-                        id
-                        title
-                        price
+                    id
+                    title
+                    price
+                    imageUrl
                     }
                 }
                 location {
@@ -169,26 +260,65 @@ class InstrumentController extends Controller
                     userID
                     email
                     instrumentsForSale {
-                        id
-                        title
-                        price
+                    id
+                    title
+                    price
+                    imageUrl
                     }
                 }
                 }
             }
-        ";
+        EOD;
+
+        $instrumentVariables = array (
+            "title" => $postOptions['title'],
+            "description" => $postOptions['description'],  
+            "imageUrl" => $postOptions['imageUrl'],
+            "type" => strtoupper($postOptions['type']),  
+            "age" => (int)$postOptions['age'],
+            "condition" => strtoupper($postOptions['condition']),  
+            "price" => (int)$postOptions['price'],
+            "location" => array(
+              "city" => $postOptions['location']
+            ),
+            "seller" => array (
+              "userID" => Auth::user()->id,
+              "userName" => Auth::user()->name,
+              "email" => Auth::user()->email,
+            )
+        );
 
         $response = Http::withHeaders([
             'Content-Type' => 'application/json',
         ])->post('http://localhost:4000/', [
-            'query' => $query
+            'query' => $instrumentQuery,
+            'variables' => $instrumentVariables
         ]);
 
-        $instrumentPost = json_decode($response)->data->instrumentPostwithID;
-
+        $post = json_decode($response)->data->createInstrumentPost;
         return view('Instruments.detail', [
-            'post'=> $instrumentPost,
+            'post' => $post,
             'messageServerUrl' => config('services.MessageService.url')
         ]);
+    }
+
+    public function delete(string $id)
+    {
+        $query = <<<'EOD'
+            mutation($postId: Int!) {
+                deleteInstrumentPost(postID: $postId) {
+                title
+                }
+            }
+        EOD;;
+
+        Http::withHeaders([
+            'Content-Type' => 'application/json',
+        ])->post('http://localhost:4000/', [
+            'query' => $query,
+            'variables' => array("postId" => (int)$id)
+        ]);
+
+        return redirect()->route('instruments.index');
     }
 }

@@ -21,6 +21,7 @@ function loadInstrumentPosts() {
             id: parseInt(row.id),
             title: row.title,
             description: row.description,
+            imageUrl: row.imageUrl,
             type: row.type,
             age: parseFloat(row.age),
             condition: row.condition,

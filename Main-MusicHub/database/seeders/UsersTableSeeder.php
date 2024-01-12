@@ -16,7 +16,7 @@ class UsersTableSeeder extends Seeder
     public function run(): void
     {
         DB::table("users")->truncate();
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 1; $i <= 5; $i++) {
             DB::table("users")->insert([
                 'name' => 'user'. $i,
                 'email'=> 'user' . $i . '@user.com',

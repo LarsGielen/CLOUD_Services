@@ -11,23 +11,7 @@
     </div>
 </x-modal>
 
-<script src="{{ asset('/js/gRPC-MessageService/GrpcMessageClient.js') }}" ></script>
+<script src="{{ asset('/js/Messages/GrpcMessageClient.js') }}" ></script>
+<script src="{{ asset('/js/Instruments/InstumentMessageModal.js') }}" ></script>
 
-<script>
-    document.querySelector('#openModalButton').addEventListener('click', () => {
-
-        document.querySelector('#sendMessageText').textContent = "Send message to " + "{{$post->seller->userName }}";
-        document.querySelector('#messageText').value = "";
-        window.dispatchEvent(new CustomEvent('open-modal', { detail: 'messageModal' }));
-    });
-
-    document.querySelector('#sendMessageButton').addEventListener('click', () => {
-        GrpcMessageClient.sendMessageToUser (
-            "{{ $messageServerUrl }}",
-            "{{ auth()->user()->id }}",
-            "{{ auth()->user()->name }}",
-            "{{ $post->seller->userID }}",
-            document.querySelector('#messageText').value
-        );
-    });
-</script>
+<script>MessageModalInit("{{ $messageServerUrl }}","{{ auth()->user()->id }}","{{ auth()->user()->name }}","{{ $post->seller->userID }}", "{{$post->seller->userName }}")</script>

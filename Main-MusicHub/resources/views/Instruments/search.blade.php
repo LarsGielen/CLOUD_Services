@@ -5,7 +5,13 @@
         </h2>
     </x-slot>
 
-    @include('Instruments.partials.search-filter')
-    @include('Instruments.partials.grid')
+    <div class="mt-12 mx-12 flex flex-col gap-4">
+        <x-primary-button class="w-full" id="createPostButton"><p class="w-full text-center">Create new post</p></x-primary-button>
+    
+        @include('Instruments.partials.search-filter')
+        <br>
+        @include('Instruments.partials.grid')
+    </div>
 
+    @include('Instruments.Partials.create-post-modal')
 </x-app-layout>

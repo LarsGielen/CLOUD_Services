@@ -42,11 +42,14 @@ type Query {
 type Mutation {
   "Create a new post"
   createInstrumentPost(
-    "the title of the post"
+    "The title of the post"
     title: String!,
 
     "The discription of the post"
     description: String!,
+
+    "The url to the image"
+    imageUrl: String!,
 
     "The type of instrument this post is selling"
     type: String!,
@@ -104,6 +107,9 @@ type InstrumentPost {
 
   "The discription of the post"
   description: String
+
+  "The url of the picture"
+  imageUrl : String
 
   "The type of instrument this post is selling"
   type: InstrumentType!

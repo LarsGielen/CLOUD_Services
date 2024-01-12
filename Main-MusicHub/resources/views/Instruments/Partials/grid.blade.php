@@ -1,7 +1,7 @@
-<div class="m-12 grid grid-cols-3 gap-6">
+<div class="grid grid-cols-3 gap-6">
     @foreach ($instrumentPosts as $instrumentPost)
         <x-list-item 
-            imageURL="https://placekitten.com/300/200"
+            imageURL="{{$instrumentPost->imageUrl}}"
             title="{{$instrumentPost->title}}"
             info="Price: €{{$instrumentPost->price}}"
             buttonText="Details"

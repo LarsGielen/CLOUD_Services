@@ -54,10 +54,13 @@ class HomeController extends Controller
         // user events
         $url = config("services.EventsAPI.url") . "/api/booking/{$userID}";
         $userEventData = [];
+        $userEventData = null;
         foreach (json_decode(Http::get($url), false)->bookings as $booking) {
             $eventData = $booking->event;
         }
-        $userEventData = ['events' => $eventData];
+        if (isset($eventData)) {
+            $userEventData = ['events' => $eventData];
+        }
 
         // user sheetMusic
         $soapClient = new SoapClient(config('services.sheetmusicAPI.wsdl'));

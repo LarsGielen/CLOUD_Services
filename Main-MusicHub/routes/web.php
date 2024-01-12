@@ -31,7 +31,9 @@ Route::get('/home', [HomeController::class,'show'])->name('home');
 // Instrument Library API- GraphQL
 Route::get('/instruments', [InstrumentController::class, 'index'])->name('instruments.index');
 Route::post('/instruments', [InstrumentController::class, 'filter'])->name('instruments.filter');
-Route::get('/instruments/{id}', [InstrumentController::class, 'show'])->name('instruments.show')->middleware('auth');;
+Route::get('/instruments/{id}', [InstrumentController::class, 'show'])->name('instruments.show')->middleware('auth');
+Route::post('/instruments/create', [InstrumentController::class, 'create'])->name('instruments.create')->middleware('auth');
+Route::get('/instruments/delete/{id}', [InstrumentController::class, 'delete'])->name('instruments.delete')->middleware('auth');
 
 // Event Booking API - REST
 Route::get('/events', [EventsController::class, 'index'])->name('events.index');
