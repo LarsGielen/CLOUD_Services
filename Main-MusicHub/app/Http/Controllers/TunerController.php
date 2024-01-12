@@ -6,15 +6,15 @@ use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
-class MusicSessionController extends Controller
+class TunerController extends Controller
 {
     /**
      * Show the Message view.
      */
     public function show(): View
     {
-        return view('MusicSession.musicSession', [ 
-            'url' => config('services.MusicSessionService.url')
+        return view('Tuner.tuner', [ 
+            'url' => config('services.TunerService.url')
         ]);
     }
 }

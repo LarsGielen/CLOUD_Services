@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MusicSessionController;
+use App\Http\Controllers\TunerController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\InstrumentController;
@@ -51,7 +52,10 @@ Route::get('/sheetmusic/pdf/{id}', [SheetMusicController::class, 'generatePDF'])
 Route::get('/messages', [MessageController::class, 'index'])->name('messages.index')->middleware('auth');
 
 // Music Session Service (Websockets)
-Route::get('/musicsession/join', [MusicSessionController::class, 'join'])->name('musicSession.join');
+Route::get('/musicsession', [MusicSessionController::class, 'show'])->name('musicSession.show');
+
+// Tuner Service (MQTT)
+Route::get('/tuner', [TunerController::class,'show'])->name('tuner.show');
 
 Route::middleware('auth')->group(function () {
 

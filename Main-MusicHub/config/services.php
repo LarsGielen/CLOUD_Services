@@ -39,4 +39,12 @@ return [
     'MessageService'=> [
         'url' => "http://localhost:6060",
     ],
+
+    'MusicSessionService'=> [
+        'url' => "ws://localhost:8081/ws",
+    ],
+
+    'TunerService'=> [
+        'url' => "ws://localhost:8081/ws",
+    ],
 ];

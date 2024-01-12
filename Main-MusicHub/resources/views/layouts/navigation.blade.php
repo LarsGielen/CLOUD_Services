@@ -39,8 +39,13 @@
                     </x-nav-link>
 
                     <!-- Music Session page -->
-                    <x-nav-link :href="route('musicSession.join')" :active="request()->routeIs('musicSession.join')">
+                    <x-nav-link :href="route('musicSession.show')" :active="request()->routeIs('musicSession.show')">
                         {{ __('Music Session') }}
+                    </x-nav-link>
+
+                    <!-- Tuner page -->
+                    <x-nav-link :href="route('tuner.show')" :active="request()->routeIs('tuner.show')">
+                        {{ __('Tuner') }}
                     </x-nav-link>
                 </div>
             </div>
