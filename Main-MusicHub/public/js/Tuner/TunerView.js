@@ -6,8 +6,6 @@ var connectedDeviceOutput = null;
 
 var client = null;
 
-const brokerUrl = 'wss://c3a83306c2b24c68835c34e6983a57b1.s2.eu.hivemq.cloud:8884/mqtt';
-
 window.onload = function() {
     deviceNameInput = document.querySelector("#deviceNameInput");
     setDeviceBtn = document.querySelector("#setDeviceBtn");
@@ -15,9 +13,11 @@ window.onload = function() {
     pitchOutput = document.querySelector("#pitchOutput");
     connectedDeviceOutput = document.querySelector("#connectedDeviceOutput");
 
-    client = new Paho.MQTT.Client(brokerUrl, 'webClient');
-
     setDeviceBtn.onclick = onSetDeviceBtn;
+}
+
+function connectToBroker(brokerURL) {
+    client = new Paho.MQTT.Client(brokerURL, 'webClient');
 
     client.onConnectionLost = onConnectionLost;
     client.onMessageArrived = onMessageArrived;

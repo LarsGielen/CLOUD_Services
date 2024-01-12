@@ -31,6 +31,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'EventsAPI'=> [
+        'url' => "http://127.0.0.1:5000",
+    ],
+
     'sheetmusicAPI'=> [
         'url' => "http://localhost:5050",
         'wsdl' => "http://localhost:5050/SheetMusicAPI.php?wsdl",
@@ -45,6 +49,6 @@ return [
     ],
 
     'TunerService'=> [
-        'url' => "ws://localhost:8081/ws",
+        'url' => "wss://c3a83306c2b24c68835c34e6983a57b1.s2.eu.hivemq.cloud:8884/mqtt",
     ],
 ];

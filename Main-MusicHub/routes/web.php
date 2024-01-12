@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MusicSessionController;
 use App\Http\Controllers\TunerController;
 use Illuminate\Support\Facades\Route;
@@ -25,9 +26,7 @@ Route::get('/', function () {
     return redirect('/home');
 });
 
-Route::get('/home', function () {
-    return view('home.home');
-})->name('home');
+Route::get('/home', [HomeController::class,'show'])->name('home');
 
 // Instrument Library API- GraphQL
 Route::get('/instruments', [InstrumentController::class, 'index'])->name('instruments.index');

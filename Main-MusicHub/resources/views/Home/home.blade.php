@@ -5,13 +5,29 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ "You're logged in!" }}
-                </div>
+@auth
+    <div class="py-4 mx-12">
+        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="p-6 text-gray-900 flex flex-col items-center">
+                <p>Welcome to MusicHub, the bla</p>
             </div>
         </div>
     </div>
+
+    @include('Home.Partials.popular-events')
+    @include('Home.Partials.user-events')
+    @include('Home.Partials.user-instruments')
+    @include('Home.Partials.user-sheetmusic')
+@else
+    <div class="py-4 mx-12">
+        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="p-6 text-gray-900 flex flex-col items-center">
+                <p>You're not logged in. To see recommendations and personal items, you need to log in!</p>
+                <a href="{{ route('login') }}"> <x-primary-button class="mt-12 mx-12"> {{ ('Login') }} </x-primary-button> </a>
+            </div>
+        </div>
+    </div>
+@endauth
+
+   
 </x-app-layout>

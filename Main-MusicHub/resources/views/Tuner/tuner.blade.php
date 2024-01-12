@@ -2,7 +2,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
     <script src="{{ asset('/js/Tuner/TunerView.js') }}"></script>
-
+    <script>connectToBroker("{{ $url }}")</script>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ "Tuner" }}

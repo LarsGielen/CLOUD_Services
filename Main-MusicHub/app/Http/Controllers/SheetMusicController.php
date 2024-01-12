@@ -78,7 +78,7 @@ class SheetMusicController extends Controller
         return response()->json(['link' => config('services.sheetmusicAPI.url') . "/" . $link]);
     }
 
-    private function convertSheetsMusicToObject($sheetMusicString) 
+    public function convertSheetsMusicToObject($sheetMusicString) 
     {
         // convert to object
         $data = json_decode(str_replace('\n', '\\\\n', $sheetMusicString))->data;
