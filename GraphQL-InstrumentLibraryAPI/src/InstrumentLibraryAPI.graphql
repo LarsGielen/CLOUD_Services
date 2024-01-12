@@ -39,6 +39,35 @@ type Query {
   filterInstrumentTypes(instrumentFamily: InstrumentFamily) : [InstrumentType]!
 }
 
+type Mutation {
+  "Create a new post"
+  createInstrumentPost(
+    "the title of the post"
+    title: String!,
+
+    "The discription of the post"
+    description: String!,
+
+    "The type of instrument this post is selling"
+    type: String!,
+
+    "The age of the instrument this post is selling"
+    age: Int!,
+
+    "The condition of the instrument this post is selling"
+    condition: InstrumentCondition!,
+    
+    "The price of the instrument this post is selling"
+    price: Float!,
+    
+    "The location of the instrument this post is selling"
+    location: LocationInput!,
+
+    "The username of the seller of the instrument"
+    seller: UserInput!
+  ) : InstrumentPost!
+}
+
 type User {
   "The id of the user"
   userID: Int!
@@ -51,6 +80,17 @@ type User {
 
   "The post for the instruments this user is selling"
   instrumentsForSale: [InstrumentPost]!
+}
+
+input UserInput {
+  "The id of the user"
+  userID: Int!
+
+  "The username of the user"
+  userName: String!
+
+  "The email of the user"
+  email: String!
 }
 
 type InstrumentPost {
@@ -88,6 +128,11 @@ type Location {
   
   "The instrument posts of all instruments sold at this location"
   instrumentsForSale: [InstrumentPost]!
+}
+
+input LocationInput {
+  "The city of the location"
+  city: String!
 }
 
 type InstrumentType {

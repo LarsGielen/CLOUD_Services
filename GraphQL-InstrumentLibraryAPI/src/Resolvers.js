@@ -71,6 +71,39 @@ function filterInstrumentTypes(parent, args) {
     return filtered;
 }
 
+// Mutation Resolvers
+const mutationResolver = {
+    createInstrumentPost: createInstrumentPost,
+}
+
+function createInstrumentPost(parent, args) {
+    var seller = {
+        userID: args.seller.userID,
+        userName: args.seller.userName,
+        email: args.seller.email,
+    }
+
+    var post = {
+        id: InstrumentPosts.length + 1,
+        title: args.title,
+        description: args.description,
+        type: InstrumentTypes.findIndex((type) => type.name == args.type),
+        age: parseFloat(args.age),
+        condition: args.condition,
+        price: parseFloat(args.price),
+        location: args.location,
+        sellerUserID: seller.userID
+    }
+
+    let userIndex = Users.findIndex((user) => user.userID === seller.userID);
+    if (userIndex != -1) {
+        Users.push(seller);
+    }
+
+    InstrumentPosts.push(post);
+    return post;
+}
+
 // Resolvers for type defentitions
 userResolver = {
     instrumentsForSale: (parent) => {
@@ -107,6 +140,7 @@ instrumentTypeResolver = {
 // Create resolvers object
 const resolvers = {
     Query: queryResolver,
+    Mutation: mutationResolver,
     User: userResolver,
     InstrumentPost: instrumentPostResolver,
     Location: locationResolver,

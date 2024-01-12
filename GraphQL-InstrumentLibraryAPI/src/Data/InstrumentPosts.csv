@@ -1,6 +1,6 @@
 id,title,type,description,age,condition,price,location,sellerUserID
 1,Acoustic Guitar,GUITAR,A beautiful acoustic guitar,3,NEW,500.0,Diepenbeek,1
-2,Old Grand Piano from my father,PIANO,Classic grand piano,70,OLD,8000.0,Peer,1
-3,New trumpet,TRUMPET,A new trumpet,1,NEW,600.0,Hasselt,1
-4,Drum Set,DRUM,Professional drum set,5,USED,1200.0,Diepenbeek,1
-5,Cello,CELLO,Vintage cello,8,USED,1500.0,Pelt,1
+2,Old Grand Piano,PIANO,Classic grand piano,70,OLD,8000.0,Peer,1
+3,New trumpet,TRUMPET,A new trumpet,1,NEW,600.0,Hasselt,3
+4,Drum Set,DRUM,Professional drum set,5,USED,1200.0,Diepenbeek,3
+5,Cello,CELLO,Vintage cello,8,USED,1500.0,Pelt,3

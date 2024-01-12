@@ -15,13 +15,14 @@ class UsersTableSeeder extends Seeder
      */
     public function run(): void
     {
-        // Add a default admin user to the database
         DB::table("users")->truncate();
-        DB::table("users")->insert([
-            'name' => 'Admin',
-            'email'=> 'admin@admin.com',
-            'email_verified_at' => now(),
-            'password'=> Hash::make('Admin'),
-        ]);
+        for ($i = 0; $i < 5; $i++) {
+            DB::table("users")->insert([
+                'name' => 'user'. $i,
+                'email'=> 'user' . $i . '@user.com',
+                'email_verified_at' => now(),
+                'password'=> Hash::make('user' . $i),
+            ]);
+        }
     }
 }
