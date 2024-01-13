@@ -1,4 +1,4 @@
-<div class="m-12 grid grid-cols-3 gap-6">
+<div class="grid grid-cols-3 gap-6">
     @foreach ($events as $event)
     @if (is_object($event))
 

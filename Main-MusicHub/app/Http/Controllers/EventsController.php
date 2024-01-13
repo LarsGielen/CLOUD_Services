@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Auth;
 
 class EventsController extends Controller
 {
@@ -13,12 +14,38 @@ class EventsController extends Controller
      */
     public function index(): View
     {
-        $response = Http::get("http://127.0.0.1:5000/api/events");
+        $response = Http::get(config("services.EventsAPI.url") . "/api/events");
         $eventData = json_decode($response, false)->events;
 
         return view('Events.search', [
             'events' => $eventData
         ]);
+    }
+
+    public function createView(): View
+    {
+        return view('Events.create', [
+            'url'=> config("services.EventsAPI.url")
+        ]);
+    }
+
+    public function create(Request $request): View
+    {
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+        ])->post(config("services.EventsAPI.url") . "/api/events", [
+            'locationID' => $request->post()['locationID'],
+            'organizerID' => $request->post()['organizerID'],
+            'date' => $request->post()['date'] . " " . $request->post()['time'],
+            'name' => $request->post()['name'],
+            'description' => $request->post()['description'],
+            'ticketPrice' => $request->post()['ticketPrice'],
+            'seats' => $request->post()['seats'],
+            'remainingSeats' => $request->post()['seats'],
+            'imageURL' => $request->post()['imageURL'],
+        ]);
+
+        return $this->showEvent(json_decode($response)->event->id);
     }
 
     /**
@@ -29,22 +56,22 @@ class EventsController extends Controller
         $url = "";
         switch ($request->post()['SortedBy']) {
             case 'None': 
-                $url = "http://127.0.0.1:5000/api/events";
+                $url = config("services.EventsAPI.url") . "/api/events";
                 break;
             case 'Popular': 
-                $url = "http://127.0.0.1:5000/api/events/sorted/popular";
+                $url = config("services.EventsAPI.url") . "/api/events/sorted/popular";
                 break;
             case 'Alphabetical': 
-                $url = "http://127.0.0.1:5000/api/events/sorted/alphabetical";
+                $url = config("services.EventsAPI.url") . "/api/events/sorted/alphabetical";
                 break;
             case 'Price': 
-                $url = "http://127.0.0.1:5000/api/events/sorted/price";
+                $url = config("services.EventsAPI.url") . "/api/events/sorted/price";
                 break;
             case 'Date': 
-                $url = "http://127.0.0.1:5000/api/events/sorted/date";
+                $url = config("services.EventsAPI.url") . "/api/events/sorted/date";
                 break;
             case 'My booked events': 
-                $url = "http://127.0.0.1:5000/api/booking/{$request->user()->id} ";
+                $url = config("services.EventsAPI.url") . "/api/booking/{$request->user()->id} ";
                 break;
         }
 
@@ -68,21 +95,20 @@ class EventsController extends Controller
     /**
      * Shows an event in detail
      */
-    public function showEvent(string $id, Request $request): View
+    public function showEvent(string $id): View
     {
+        $userID = Auth::user()->id;
         $bookingFromUser = null;
-        if ($request->user() != null) {
-            foreach(json_decode(Http::get("http://127.0.0.1:5000/api/booking/{$request->user()->id}"), false)->bookings as $booking) {
-                if ( $booking->event->id == $id ) {
-                    $bookingFromUser = $booking;
-                }
+        foreach(json_decode(Http::get(config("services.EventsAPI.url") . "/api/booking/{$userID}"), false)->bookings as $booking) {
+            if ( $booking->event->id == $id ) {
+                $bookingFromUser = $booking;
             }
         }
 
         return view('Events.event-detail', [
-            'event' => json_decode(Http::get("http://127.0.0.1:5000/api/events/{$id}"), false)->event,
+            'event' => json_decode(Http::get(config("services.EventsAPI.url") . "/api/events/{$id}"), false)->event,
             'bookedByUser' => $bookingFromUser,
-            'user' => $request->user(),
+            'user' => Auth::user(),
         ]);
     }
 
@@ -92,8 +118,8 @@ class EventsController extends Controller
     public function showLocation(string $id, Request $request): View
     {
         return view('Events.location-detail', [
-            'location' => json_decode(Http::get("http://127.0.0.1:5000/api/locations/{$id}"), false)->location,
-            'events' => json_decode(Http::get("http://127.0.0.1:5000/api/locations/events/{$id}"), false)->events,
+            'location' => json_decode(Http::get(config("services.EventsAPI.url") . "/api/locations/{$id}"), false)->location,
+            'events' => json_decode(Http::get(config("services.EventsAPI.url") . "/api/locations/events/{$id}"), false)->events,
             'user' => $request->user(),
         ]);
     }
@@ -104,8 +130,8 @@ class EventsController extends Controller
     public function showOrganizer(string $id, Request $request): View
     {
         return view('Events.organizer-detail', [
-            'organizer' => json_decode(Http::get("http://127.0.0.1:5000/api/organizers/{$id}"), false)->organizer,
-            'events' => json_decode(Http::get("http://127.0.0.1:5000/api/organizers/events/{$id}"), false)->events,
+            'organizer' => json_decode(Http::get(config("services.EventsAPI.url") . "/api/organizers/{$id}"), false)->organizer,
+            'events' => json_decode(Http::get(config("services.EventsAPI.url") . "/api/organizers/events/{$id}"), false)->events,
             'user' => $request->user(),
         ]);
     }
@@ -117,7 +143,7 @@ class EventsController extends Controller
     {
         $response = Http::withHeaders([
             'Content-Type' => 'application/json',
-        ])->post("http://127.0.0.1:5000/api/booking", [
+        ])->post(config("services.EventsAPI.url") . "/api/booking", [
             'userID' => (int)$request->user()->id,
             'userEmail'=> $request->post()["userEmail"],
             'ticketAmount'=> (int)$request->post()['ticketAmount'],

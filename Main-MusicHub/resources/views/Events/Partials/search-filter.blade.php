@@ -1,4 +1,4 @@
-<form method="post" action="{{ route('events.filter') }}" class="m-12">
+<form method="post" action="{{ route('events.filter') }}">
     @csrf
 
     <div class="flex gap-4 bg-white shadow-sm rounded-lg p-4">

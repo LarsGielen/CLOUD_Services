@@ -10,7 +10,7 @@ def getOrganizerByID(id):
     return {'organizer': organizer.toJSON()}
 
 def addOrganizer():
-    organizer = Organizer(name=request.json['name'], description=request.json['description'], contactPerson=request.json['contactPerson'])
+    organizer = Organizer(name=request.json['name'], description=request.json['description'], contactPerson=request.json['contactPerson'], imageURL=request.json['imageURL'])
     db.session.add(organizer)
     db.session.commit()
     return {'organizer': organizer.toJSON()}
@@ -20,6 +20,7 @@ def editOrganizer(id):
     organizer.name = request.json['name']
     organizer.description = request.json['description']
     organizer.contactPerson = request.json['contactPerson']
+    organizer.imageURL = request.json['imageURL']
     db.session.commit()
     return {'organizer': organizer.toJSON()}
 

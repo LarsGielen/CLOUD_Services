@@ -4,6 +4,7 @@
 
 """
 from flask import Flask
+from flask_cors import CORS
 
 from models import db
 from routes_location import *
@@ -14,6 +15,7 @@ from createDatabase import createDatabase
 
 server = Flask(__name__)
 server.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data.db"
+CORS(server) 
 
 db.init_app(server)
 

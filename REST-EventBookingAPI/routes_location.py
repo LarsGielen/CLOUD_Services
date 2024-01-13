@@ -12,7 +12,7 @@ def getLocationByID(id):
     return {'location': location.toJSON()}
 
 def addLocation():
-    location = Location(name=request.json['name'], description=request.json['description'], address=request.json['address'])
+    location = Location(name=request.json['name'], description=request.json['description'], address=request.json['address'], imageURL=request.json['imageURL'])
     db.session.add(location)
     db.session.commit()
     return {'location': location.toJSON()}
@@ -22,6 +22,7 @@ def editLocation(id):
     location.name = request.json['name']
     location.description = request.json['description']
     location.address = request.json['address']
+    location.imageURL = request.json['imageURL']
     db.session.commit()
     return {'location': location.toJSON()}
 

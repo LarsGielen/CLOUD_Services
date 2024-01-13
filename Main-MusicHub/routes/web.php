@@ -38,7 +38,9 @@ Route::get('/instruments/delete/{id}', [InstrumentController::class, 'delete'])-
 // Event Booking API - REST
 Route::get('/events', [EventsController::class, 'index'])->name('events.index');
 Route::post('/events', [EventsController::class, 'filter'])->name('events.filter');
-Route::get('/events/{id}', [EventsController::class, 'showEvent'])->name('events.show.event');
+Route::get('/events/create', [EventsController::class, 'createView'])->name('events.createView')->middleware('auth');
+Route::post('/events/create', [EventsController::class, 'create'])->name('events.create')->middleware('auth');
+Route::get('/events/{id}', [EventsController::class, 'showEvent'])->name('events.show.event')->middleware('auth');
 Route::get('/events/locations/{id}', [EventsController::class, 'showLocation'])->name('events.show.location');
 Route::get('/events/organizers/{id}', [EventsController::class, 'showOrganizer'])->name('events.show.organizer');
 Route::post('/events/book', [EventsController::class, 'book'])->name('events.book')->middleware('auth');

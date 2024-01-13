@@ -15,13 +15,15 @@ def addEvent():
     organizer = Organizer.query.get_or_404(request.json['organizerID'])
     date = datetime.strptime(request.json['date'], "%Y-%m-%d %H:%M")
     event = Event(
-        name=request.json['name'], 
-        description=request.json['description'], 
-        date=date, 
-        ticketPrice=request.json['ticketPrice'], 
-        seats=request.json['seats'], 
-        remainingSeats=request.json['remainingSeats'], 
-        location=location, organizer=organizer
+        name = request.json['name'], 
+        description = request.json['description'], 
+        date = date, 
+        ticketPrice = request.json['ticketPrice'], 
+        seats = request.json['seats'], 
+        remainingSeats = request.json['remainingSeats'], 
+        location = location, 
+        organizer = organizer,
+        imageURL = request.json['imageURL']
     )
     db.session.add(event)
     db.session.commit()
@@ -37,6 +39,7 @@ def editEvent(id):
     event.ticketPrice = request.json['ticketPrice']
     event.seats = request.json['seats']
     event.remainingSeats = request.json['remainingSeats']
+    event.imageURL = request.json['imageURL']
     db.session.commit()
     return {'event': event.toJSON()}
 
