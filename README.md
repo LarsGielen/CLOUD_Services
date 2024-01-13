@@ -6,61 +6,33 @@
   <h1>MusicHub</h1>
 </div>
 
-## Deelservices
-### 1. GraphQL:
-- **Servicenaam:** InstrumentLibraryAPI
-- **Programmeertaal:** JavaScript / Node.js
-- **Programmeertaal uit de les:** Python
+# Welcome to MuseHub!
+Welcome to MuseHub, a website that allows users to buy and sell musical instruments, organize and attend events, collaborate on sheet music creation, and communicate with other users. This wiki provides an overview of the website's functionalities and how to navigate through them.
 
-**Beschrijving:** 
+MuseHub is built using the Laravel PHP framework, with the authentication system powered by the Breeze package. The website seamlessly integrates six different web services to provide a comprehensive musical experience. These services include GraphQL, REST API, SOAP, gRPC, Websockets, and MQTT.
 
-Een GraphQL-service voor het kopen en verkopen van instrumenten. Muzikanten kunnen hun niet gebruikte instrumenten verkopen aan mensen die graag een 2de hands instrument willen kopen. Je kan instrumenten zoeken op onder andere het type, leeftijd, locatie en prijs. De GraphQL-service biedt een flexibele en efficiënte manier voor gebruikers om specifieke gegevens op te vragen, waardoor overbodige gegevens worden vermeden.
+# Page Overview
 
-### 2. REST (Representational State Transfer):
-- **Servicenaam:** EventBookingAPI
-- **Programmeertaal:** Python
-- **Programmeertaal uit de les:** PHP / Laravel Framework
+## Authentication page
+The user can log in to his acount, or create a new acount via this page. This page is powered by the laravel breeze package.
 
-**Beschrijving:** 
+## Home page
+The home page shows some recommended and personal items. It shows the most popular events, the music you uploaded and the event that you have booked
 
-Een REST API voor het boeken van muziekevenementen. Muzikanten en evenementorganisatoren kunnen de API gebruiken om locaties voor muziekoptredens te beheren en te boeken. De API stelt gebruikers in staat om te zoeken naar komende evenementen, tickets te boeken en informatie te verkrijgen over de uitvoerders en het programma.
+## Instruments page (graphql)
+The Instrument page shows all Instruments that are on sale. The user can filter the instrulent on different criteria like price, instrument type and more. The user can also create its own sale post. 
 
-### 3. gRPC (Remote Procedure Call):
-- **Servicenaam:** MessageAPI
-- **Programmeertaal:** C#
-- **Programmeertaal uit de les:** java
+## Events page (REST)
+The Event page shows all events. The user can sort these events by popularity, name, price and date. If users are logged in they also have the option to look at their booked events. If user want to go to an event they can book tickets, and users can also create a new event, or delete an event that they have created. 
 
-**Beschrijving:** 
+## Sheet Music page (SOAP)
+The Sheet Music page shows all uploaded sheet music. This music is searchable by title. Users can look at the music, generate a PDF or senda message to the componist. 
 
-Een gRPC-service voor het sturen van berichten tussen gebruikers.
+## Messages page (gRPC)
+Here users can see and reply to all their messages.
 
-### 4. SOAP (Simple Object Access Protocol):
-- **Servicenaam:** SheetMusicAPI
-- **Programmeertaal:** php
-- **Programmeertaal uit de les:** C#
+## Music Session (websockets)
+The Music Session page allows users to create or join a room and create new sheet music together. when the music is done they can upload the music to the Sheet Music API.
 
-**Beschrijving:** 
-
-Een SOAP service waarmee klassieke muzikanten toegang hebben tot een repository van digitale bladmuziek. Muzikanten kunnen zoeken naar specifieke composities, bladmuziek ophalen in verschillende formaten en zelfs hun eigen composities uploaden om te delen met anderen.
-
-### 5. MQTT (Message Queuing Telemetry Transport):
-- **Servicenaam:** RealTimeMusicUpdates
-- **Programmeertaal:** Python
-- **Programmeertaal uit de les:** Python
-
-**Beschrijving:** 
-
-Een op MQTT gebaseerde service voor het verzenden van realtime updates over nieuwe bladmuziek en/of populaire bladmuziek. Geabonneerde gebruikers ontvangen direct meldingen bij veranderingen of nieuwe inhoud.
-
-### 6. Websockets:
-- **Servicenaam:** CollaborativeMusicSession
-- **Programmeertaal:** JavaScript / Node.js
-- **Programmeertaal uit de les:** JavaScript / Node.js
-
-**Beschrijving:** 
-
-Een WebSocket-service voor het hosten van gezamenlijke muziek sessies. Muzikanten kunnen verbinding maken met de service, deelnemen aan een virtuele kamer waar ze met elkaar kunnen chatten en samen bladmuziek kunnen maken.
-
-## Consumatie van services
-De verschillende services zullen worden geconcumeerd in laravel met php. Ook zal de publieke API van openopus (https://github.com/openopus-org/openopus_api/tree/master) worden gebruikt om een database de hebben van verschillende componisten en hun composities. Authenticatie wordt gedaan met behulp van laravel breeze.
-
+## Tuner page (MQTT)
+The Tuner page allows users to conect their tuner to the website, this way they can check if they are playing to many wrong notes.
