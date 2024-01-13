@@ -13,10 +13,13 @@
             <b class="text-3xl font-bold text-red-500">Get for €{{ $event->ticketPrice }}</b>
             @else   
             <b class="text-3xl font-bold text-green-500">You have booked {{ $bookedByUser->ticketAmount }} seats</b>
+            <form method="post" action="{{ route('events.cancelbooking')}}">
+                @csrf
+                <input name="bookingID" type="hidden" value="{{ $bookedByUser->id }}"/>
+                <x-primary-button><p class="text-red-400">Cancel Booking</p></x-primary-button>
+            </form>
             @endif
-            <x-primary-button class="flex-none" x-data="" x-on:click.prevent="$dispatch('open-modal', 'getTicketModal')">
-                {{ ('Get Tickets') }}
-            </x-primary-button>
+            <x-primary-button class="flex-none" x-data="" x-on:click.prevent="$dispatch('open-modal', 'getTicketModal')">Get Tickets</x-primary-button>
         </div>
         <br>
         <div class="flex gap-4">

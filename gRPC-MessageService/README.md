@@ -18,13 +18,9 @@ This method is called when a client opens a stream to listen for incoming messag
 
 To run the server, make sure to install all dependencies, then run the following command:
 
-```Command
+```console
 dotnet run
 ```
-
-# Group Message Service Implementation
-
-TODO
 
 # C# Client Implementation
 
@@ -60,7 +56,7 @@ Install the generator for gRPC-Web [here](https://github.com/grpc/grpc-web/relea
 
 **Make sure that both these files are added to your path variables!**
 
-Run the following command to generate the files:
+Run the following commands to generate the files:
 
 ```command
 protoc -I="./Proto" ./Proto/protobuf.proto --js_out=import_style=commonjs:"./src" --grpc-web_out=import_style=commonjs,mode=grpcwebtext:"./src"
@@ -80,4 +76,4 @@ python -m http.server 8080
 
 # Notes
 
-Update the server address in the client code to match your server configuration. You can find change the server port in the appsettings.json file inside the Properties folder. for normal gRPC clients (Http2), the default is `https://localhost:6061`. For browser based clients (Http1), the default is `https://localhost:6060` 
+Update the server address in the client code to match your server configuration. You can find the server port in the appsettings.json file inside the Properties folder. for normal gRPC clients (Http2), the default is `https://localhost:6061`. For browser based clients (Http1), the default is `https://localhost:6060` 

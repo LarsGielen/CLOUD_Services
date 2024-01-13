@@ -31,16 +31,20 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
-    'EventsAPI'=> [
+    'InstrumentLibraryAPI'=> [
+        'url' => "http://127.0.0.1:4000",
+    ],
+
+    'EventBookingAPI'=> [
         'url' => "http://127.0.0.1:5000",
     ],
 
-    'sheetmusicAPI'=> [
+    'SheetMusicAPI'=> [
         'url' => "http://localhost:5050",
         'wsdl' => "http://localhost:5050/SheetMusicAPI.php?wsdl",
     ],
 
-    'MessageService'=> [
+    'MessageAPI'=> [
         'url' => "http://localhost:6060",
     ],
 

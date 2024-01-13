@@ -14,7 +14,7 @@ class MessageController extends Controller
     public function index(): View
     {
         return view('Messages.main', [
-            'messageServerUrl' => config('services.MessageService.url')
+            'messageServerUrl' => config('services.MessageAPI.url')
         ]);
     }
 }

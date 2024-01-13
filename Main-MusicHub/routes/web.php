@@ -44,11 +44,12 @@ Route::get('/events/{id}', [EventsController::class, 'showEvent'])->name('events
 Route::get('/events/locations/{id}', [EventsController::class, 'showLocation'])->name('events.show.location');
 Route::get('/events/organizers/{id}', [EventsController::class, 'showOrganizer'])->name('events.show.organizer');
 Route::post('/events/book', [EventsController::class, 'book'])->name('events.book')->middleware('auth');
+Route::post('/events/book/cancel', [EventsController::class, 'cancelBooking'])->name('events.cancelbooking')->middleware('auth');
 
 // Sheet Music API - SOAP
 Route::get('/sheetmusic', [SheetMusicController::class, 'index'])->name('sheetmusic.index');
 Route::post('/sheetmusic', [SheetMusicController::class, 'filter'])->name('sheetmusic.filter');
-Route::post('/sheetmusic/create', [SheetMusicController::class, 'create'])->name('sheetmusic.create');
+Route::post('/sheetmusic/create', [SheetMusicController::class, 'create'])->name('sheetmusic.create')->middleware('auth');
 Route::get('/sheetmusic/{id}', [SheetMusicController::class, 'show'])->name('sheetmusic.show')->middleware('auth');
 Route::get('/sheetmusic/pdf/{id}', [SheetMusicController::class, 'generatePDF'])->name('sheetmusic.generatePDF')->middleware('auth');
 

@@ -16,7 +16,7 @@ class SheetMusicController extends Controller
     public function index(): View
     {
         // create a new soap client from the wsdl file provided by the service
-        $soapClient = new SoapClient(config('services.sheetmusicAPI.wsdl'));
+        $soapClient = new SoapClient(config('services.SheetMusicAPI.wsdl'));
 
         // call the function via the soap client and get the response
         $data = $this->convertSheetsMusicToObject($soapClient->getMusic());
@@ -35,7 +35,7 @@ class SheetMusicController extends Controller
         $title = $request->post()['title'];
 
         // create a new soap client from the wsdl file provided by the service
-        $soapClient = new SoapClient(config('services.sheetmusicAPI.wsdl'));
+        $soapClient = new SoapClient(config('services.SheetMusicAPI.wsdl'));
 
         // call the function via the soap client and get the response
         $data = $this->convertSheetsMusicToObject($soapClient->getMusicLikeTitle($title));
@@ -53,7 +53,7 @@ class SheetMusicController extends Controller
         $userID = Auth::user()->id;
 
         // create a new soap client from the wsdl file provided by the service
-        $soapClient = new SoapClient(config('services.sheetmusicAPI.wsdl'));
+        $soapClient = new SoapClient(config('services.SheetMusicAPI.wsdl'));
         $data = $this->convertSheetsMusicToObject($soapClient->storeMusic($notation, $userID, $title))[0];
 
         return redirect()->route('sheetmusic.index');
@@ -65,7 +65,7 @@ class SheetMusicController extends Controller
     public function show(int $id): View
     {
         // create a new soap client from the wsdl file provided by the service
-        $soapClient = new SoapClient(config('services.sheetmusicAPI.wsdl'));
+        $soapClient = new SoapClient(config('services.SheetMusicAPI.wsdl'));
 
         // call the function via the soap client and get the response
         $data = $this->convertSheetsMusicToObject($soapClient->getMusicByID($id))[0];
@@ -84,12 +84,12 @@ class SheetMusicController extends Controller
     public function generatePDF(int $id)
     {
         // create a new soap client from the wsdl file provided by the service
-        $soapClient = new SoapClient(config('services.sheetmusicAPI.wsdl'));
+        $soapClient = new SoapClient(config('services.SheetMusicAPI.wsdl'));
 
         // call the function via the soap client and get the response
         $link = json_decode($soapClient->convertMusicToPdfById($id))->data;
 
-        return response()->json(['link' => config('services.sheetmusicAPI.url') . "/" . $link]);
+        return response()->json(['link' => config('services.SheetMusicAPI.url') . "/" . $link]);
     }
 
     public function convertSheetsMusicToObject($sheetMusicString) 

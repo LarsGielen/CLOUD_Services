@@ -47,6 +47,11 @@
                     <x-nav-link :href="route('tuner.show')" :active="request()->routeIs('tuner.show')">
                         {{ __('Tuner') }}
                     </x-nav-link>
+
+                    <!-- Wiki link -->
+                    <x-nav-link href="https://github.com/LarsG-2158052/CLOUD_Services/wiki">
+                        {{ __('Wiki') }}
+                    </x-nav-link>
                 </div>
             </div>
 

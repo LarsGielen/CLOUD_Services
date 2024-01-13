@@ -6,14 +6,6 @@
     </x-slot>
 
 @auth
-    <div class="py-4 mx-12">
-        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="p-6 text-gray-900 flex flex-col items-center">
-                <p>Welcome to MusicHub, the bla</p>
-            </div>
-        </div>
-    </div>
-
     @include('Home.Partials.popular-events')
     @include('Home.Partials.user-events')
     @include('Home.Partials.user-instruments')
@@ -29,5 +21,4 @@
     </div>
 @endauth
 
-   
 </x-app-layout>

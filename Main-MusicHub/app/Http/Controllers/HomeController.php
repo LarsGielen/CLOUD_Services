@@ -40,7 +40,7 @@ class HomeController extends Controller
 
         $instrumentResponse = Http::withHeaders([
             'Content-Type' => 'application/json',
-        ])->post('http://localhost:4000/', [
+        ])->post(config("services.InstrumentLibraryAPI.url"), [
             'query' => $instrumentQuery,
             'variables' => $instrumentVariables
         ]);
@@ -48,11 +48,11 @@ class HomeController extends Controller
         $userInstrumentPosts = json_decode($instrumentResponse, false)->data->filterInstrumentPosts;
 
         // popular events
-        $url = config("services.EventsAPI.url") . "/api/events/sorted/popular/3";
+        $url = config("services.EventBookingAPI.url") . "/api/events/sorted/popular/3";
         $popularEventData = json_decode(Http::get($url), false)->events;
 
         // user events
-        $url = config("services.EventsAPI.url") . "/api/booking/{$userID}";
+        $url = config("services.EventBookingAPI.url") . "/api/booking/{$userID}";
         $userEventData = [];
         $userEventData = null;
         foreach (json_decode(Http::get($url), false)->bookings as $booking) {

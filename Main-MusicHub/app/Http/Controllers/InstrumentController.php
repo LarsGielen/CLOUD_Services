@@ -42,13 +42,13 @@ class InstrumentController extends Controller
 
         $instrumentResponse = Http::withHeaders([
             'Content-Type' => 'application/json',
-        ])->post('http://localhost:4000/', [
+        ])->post(config("services.InstrumentLibraryAPI.url"), [
             'query' => $instrumentQuery
         ]);
 
         $instrumentTypeResponse = Http::withHeaders([
             'Content-Type' => 'application/json',
-        ])->post('http://localhost:4000/', [
+        ])->post(config("services.InstrumentLibraryAPI.url"), [
             'query' => $filteredinstrumentTypes
         ]);
         
@@ -82,7 +82,7 @@ class InstrumentController extends Controller
 
         $instrumentTypeResponse = Http::withHeaders([
             'Content-Type' => 'application/json',
-        ])->post('http://localhost:4000/', [
+        ])->post(config("services.InstrumentLibraryAPI.url"), [
             'query' => $instrumentTypeQuery,
             'variables' => $instrumentTypeVariables
         ]);
@@ -109,7 +109,7 @@ class InstrumentController extends Controller
         EOD;
         $instrumentTypeResponse = Http::withHeaders([
             'Content-Type' => 'application/json',
-        ])->post('http://localhost:4000/', [
+        ])->post(config("services.InstrumentLibraryAPI.url"), [
             'query' => $instrumentTypes
         ]);
 
@@ -137,7 +137,7 @@ class InstrumentController extends Controller
 
         $instrumentResponse = Http::withHeaders([
             'Content-Type' => 'application/json',
-        ])->post('http://localhost:4000/', [
+        ])->post(config("services.InstrumentLibraryAPI.url"), [
             'query' => $instrumentQuery,
             'variables' => $instrumentVariables
         ]);
@@ -195,7 +195,7 @@ class InstrumentController extends Controller
 
         $response = Http::withHeaders([
             'Content-Type' => 'application/json',
-        ])->post('http://localhost:4000/', [
+        ])->post(config("services.InstrumentLibraryAPI.url"), [
             'query' => $query,
             'variables' => array("instrumentPostwithIdId" => $id)
         ]);
@@ -290,7 +290,7 @@ class InstrumentController extends Controller
 
         $response = Http::withHeaders([
             'Content-Type' => 'application/json',
-        ])->post('http://localhost:4000/', [
+        ])->post(config("services.InstrumentLibraryAPI.url"), [
             'query' => $instrumentQuery,
             'variables' => $instrumentVariables
         ]);
@@ -314,7 +314,7 @@ class InstrumentController extends Controller
 
         Http::withHeaders([
             'Content-Type' => 'application/json',
-        ])->post('http://localhost:4000/', [
+        ])->post(config("services.InstrumentLibraryAPI.url"), [
             'query' => $query,
             'variables' => array("postId" => (int)$id)
         ]);

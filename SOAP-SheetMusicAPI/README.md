@@ -28,7 +28,7 @@ php -S localhost:5050 -t C:\path\to\project
 
 The port (5050) can be changed to any available port, but remember to change the port in the SheetMusicAPI.php file as well.
 
-# USing the api
+# Using the api
 
 ## API Endpoints
 
