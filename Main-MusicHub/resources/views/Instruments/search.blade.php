@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="mt-12 mx-12 flex flex-col gap-4">
+    <div class="mx-12 py-6 flex flex-col gap-6">
         <x-primary-button class="w-full" id="createPostButton"><p class="w-full text-center">Create new post</p></x-primary-button>
     
         @include('Instruments.partials.search-filter')

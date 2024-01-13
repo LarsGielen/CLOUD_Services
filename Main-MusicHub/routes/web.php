@@ -48,6 +48,7 @@ Route::post('/events/book', [EventsController::class, 'book'])->name('events.boo
 // Sheet Music API - SOAP
 Route::get('/sheetmusic', [SheetMusicController::class, 'index'])->name('sheetmusic.index');
 Route::post('/sheetmusic', [SheetMusicController::class, 'filter'])->name('sheetmusic.filter');
+Route::post('/sheetmusic/create', [SheetMusicController::class, 'create'])->name('sheetmusic.create');
 Route::get('/sheetmusic/{id}', [SheetMusicController::class, 'show'])->name('sheetmusic.show')->middleware('auth');
 Route::get('/sheetmusic/pdf/{id}', [SheetMusicController::class, 'generatePDF'])->name('sheetmusic.generatePDF')->middleware('auth');
 

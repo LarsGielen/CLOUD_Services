@@ -13,7 +13,7 @@ class SoapService {
      * @return string inserted music object as a json string
      */
     function storeMusic($abcNotation, $userID, $musicTitle)
-    {
+    {        
         $id = (new DatabaseHandler())->insertSheetMusic( new SheetMusic(
             abcNotation: $abcNotation,
             userID: $userID,

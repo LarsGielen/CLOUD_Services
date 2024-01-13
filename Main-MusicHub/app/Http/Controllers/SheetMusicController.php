@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\View\View;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use SoapClient;
 
 class SheetMusicController extends Controller
@@ -45,6 +46,19 @@ class SheetMusicController extends Controller
         ]);
     }
 
+    public function create(Request $request)
+    {
+        $title = $request->post()["title"];
+        $notation = $request->post()["notation"];
+        $userID = Auth::user()->id;
+
+        // create a new soap client from the wsdl file provided by the service
+        $soapClient = new SoapClient(config('services.sheetmusicAPI.wsdl'));
+        $data = $this->convertSheetsMusicToObject($soapClient->storeMusic($notation, $userID, $title))[0];
+
+        return redirect()->route('sheetmusic.index');
+    }
+
     /**
      * Show the details of a music sheet.
      */
@@ -55,7 +69,7 @@ class SheetMusicController extends Controller
 
         // call the function via the soap client and get the response
         $data = $this->convertSheetsMusicToObject($soapClient->getMusicByID($id))[0];
-        $otherMusicFromUser = $this->convertSheetsMusicToObject($soapClient->getMusicByUserID ($data->userID));
+        $otherMusicFromUser = $this->convertSheetsMusicToObject($soapClient->getMusicByUserID($data->userID));
 
         return view("SheetMusic.detail", [
             "SheetMusic"=> $data,
@@ -81,7 +95,9 @@ class SheetMusicController extends Controller
     public function convertSheetsMusicToObject($sheetMusicString) 
     {
         // convert to object
-        $data = json_decode(str_replace('\n', '\\\\n', $sheetMusicString))->data;
+        $sheetMusicString = str_replace('\r', '', $sheetMusicString);
+        $sheetMusicString = str_replace('\n', '\\\\n', $sheetMusicString);
+        $data = json_decode($sheetMusicString)->data;
 
         // Iterate through each object in the array and add the 'username' property
         foreach ($data as $sheetMusic) {
