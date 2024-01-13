@@ -12,6 +12,7 @@
   "type": "commonjs",
   "dependencies": {
     "@apollo/server": "^4.9.5",
+    "csv-parser": "^3.0.0",
     "fs": "^0.0.1-security",
     "graphql": "^16.8.1"
   }
