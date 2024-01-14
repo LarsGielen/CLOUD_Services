@@ -32,27 +32,27 @@ return [
     ],
 
     'SheetMusicAPI'=> [
-        'url' => "http://localhost:5050",
-        'wsdl' => "http://localhost:5050/SheetMusicAPI.php?wsdl",
+        'url' => "http://" . env('API_URL_SHEETMUSIC', "localhost:5050"),
+        'wsdl' => "http://" . env('API_URL_SHEETMUSIC', "localhost:5050") . "/SheetMusicAPI.php?wsdl",
     ],
 
     'InstrumentLibraryAPI'=> [
-        'url' => "http://127.0.0.1:5051",
+        'url' => "http://" . env('API_URL_INSTRUMENTLIBRARY', "localhost:5051"),
     ],
     
     'MessageAPI'=> [
-        'url' => "http://localhost:5052",
+        'url' => "http://" . env('API_URL_MESSAGESERVICE', "localhost:5052"),
     ],
 
     'EventBookingAPI'=> [
-        'url' => "http://127.0.0.1:5053",
+        'url' => "http://" . env('API_URL_EVENTBOOKING', "localhost:5053"),
     ],
 
     'MusicSessionService'=> [
-        'url' => "ws://localhost:5054/ws",
+        'url' => "ws://" . env('API_URL_MUSICSESSION', "localhost:5054") . "/ws",
     ],
 
     'TunerService'=> [
-        'url' => "wss://c3a83306c2b24c68835c34e6983a57b1.s2.eu.hivemq.cloud:8884/mqtt",
+        'url' => "wss://" . env('API_URL_TUNERSERVICE', "c3a83306c2b24c68835c34e6983a57b1.s2.eu.hivemq.cloud:8884/mqtt"),
     ],
 ];

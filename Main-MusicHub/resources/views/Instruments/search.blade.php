@@ -8,9 +8,9 @@
     <div class="mx-12 py-6 flex flex-col gap-6">
         <x-primary-button class="w-full" id="createPostButton"><p class="w-full text-center">Create new post</p></x-primary-button>
     
-        @include('Instruments.partials.search-filter')
+        @include('Instruments.Partials.search-filter')
         <br>
-        @include('Instruments.partials.grid')
+        @include('Instruments.Partials.grid')
     </div>
 
     @include('Instruments.Partials.create-post-modal')

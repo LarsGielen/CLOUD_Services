@@ -1,6 +1,39 @@
 version: '3'
 
 services:
+  # website_php:
+  #   build:
+  #     context: ./Main-MusicHub
+  #     target: php
+  #   ports:
+  #     - "7070:80"
+  #   environment:
+  #     - APP_NAME=MusicHub
+  #     - APP_URL=http://localhost
+  #     - DB_CONNECTION=mysql
+  #     - DB_HOST=db
+  #     - DB_PORT=3306
+  #     - DB_DATABASE=MusicHub
+  #     - DB_USERNAME=root
+  #     - DB_PASSWORD=root
+  #     - API_URL_SHEETMUSIC="sheet_music_api:80"
+  #     - API_URL_INSTRUMENTLIBRARY="instrument_library_api:80"
+  #     - API_URL_MESSAGESERVICE="message_service:6060"
+  #     - API_URL_EVENTBOOKING="event_booking_api:80"
+  #     - API_URL_MUSICSESSION="collaborative_music_session_service:80"
+  #     - API_URL_TUNERSERVICE="c3a83306c2b24c68835c34e6983a57b1.s2.eu.hivemq.cloud:8884/mqtt"
+  #   depends_on:
+  #     - db
+  #     - phpmyadmin
+
+  # website_node:
+  #   build:
+  #     context: ./Main-MusicHub
+  #     target: node
+  #   ports:
+  #     - 5173:5173
+  #   command: "npm run dev"
+
   sheet_music_api:
     build:
       context: ./SOAP-SheetMusicAPI
@@ -9,7 +42,7 @@ services:
     environment:
       DB_HOST: db
       DB_ROOT_PASSWORD: root
-      PORT: 5050
+      PORT: 80
 
   instrument_library_api:
     build:
