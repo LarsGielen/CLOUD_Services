@@ -82,4 +82,4 @@ server.add_url_rule('/api/booking', view_func=addBooking, methods=['POST']) # Cr
 server.add_url_rule('/api/booking/<id>', view_func=deleteBooking, methods=['DELETE']) # Delete a booking with ID
 
 # start server
-server.run(port=5000)
+server.run(host='0.0.0.0', port=80)

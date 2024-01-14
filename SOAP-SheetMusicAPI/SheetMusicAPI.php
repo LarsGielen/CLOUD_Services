@@ -7,7 +7,7 @@ use Laminas\Soap\AutoDiscover;
 use Laminas\Soap\Server;
 
 // Set the URI for the service
-$port = '5050';
+$port = getenv('PORT') ?: 5054;
 $uri = 'http://localhost:' . $port . '/SheetMusicAPI.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {

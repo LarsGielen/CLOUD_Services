@@ -204,7 +204,7 @@ class InstrumentController extends Controller
 
         return view('Instruments.detail', [
             'post'=> $instrumentPost,
-            'messageServerUrl' => config('services.MessageService.url')
+            'messageServerUrl' => config('services.MessageAPI.url')
         ]);
     }
 

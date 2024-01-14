@@ -1,0 +1,8 @@
+__pycache__
+.venv
+instance
+.dockerignore
+.gitignore
+.vs
+.vscode
+README.md

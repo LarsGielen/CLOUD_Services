@@ -150,7 +150,7 @@ class EventsController extends Controller
             'eventID'=> (int)$request->post()['eventID']
         ]);
 
-        if ($response->getStatusCode() == 404) {
+        if ($response->getStatusCode() == 404 || $response->getStatusCode() == 500) {
             return view('error', [
                 'message'=> 'An error accured while booking your event'
             ]);

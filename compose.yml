@@ -1,0 +1,51 @@
+version: '3'
+
+services:
+  sheet_music_api:
+    build:
+      context: ./SOAP-SheetMusicAPI
+    ports:
+      - "5050:80"
+    environment:
+      DB_HOST: db
+      DB_ROOT_PASSWORD: root
+      PORT: 5050
+
+  instrument_library_api:
+    build:
+      context: ./GraphQL-InstrumentLibraryAPI
+    ports:
+      - "5051:80"
+
+  message_service:
+    build:
+      context: ./gRPC-MessageService/gRPC-MessageService
+    ports:
+      - "5052:6060"
+      - "6061:6061"
+
+  event_booking_api:
+    build:
+      context: ./REST-EventBookingAPI
+    ports:
+      - "5053:80"
+
+  collaborative_music_session_service:
+    build:
+      context: ./Websockets-CollaborativeMusicSession/Server
+    ports:
+      - "5054:80"
+
+  db:
+    image: mariadb:10.6
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    restart: always
+    ports:
+      - 5055:80
+    environment:
+      - PMA_ARBITRARY=1

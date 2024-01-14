@@ -11,7 +11,7 @@
     </div>
 </x-modal>
 
-<script src="{{ asset('/js/gRPC-MessageService/GrpcMessageClient.js') }}" ></script>
+<script src="{{ asset('/js/Messages/GrpcMessageClient.js') }}" ></script>
 
 <script>
     document.querySelector('#openModalButton').addEventListener('click', () => {

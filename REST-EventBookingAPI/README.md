@@ -10,10 +10,10 @@ Before running the API, make sure to install the required dependencies. The foll
 pip install Flask Flask-SQLAlchemy Faker
 ```
 
-To start the server, open a Python console and run the following command:
+To start the server, open a  console and run the following command:
 
 ```console
-from server import *
+python server.py
 ```
 
 # Using the API

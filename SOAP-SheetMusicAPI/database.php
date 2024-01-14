@@ -12,9 +12,9 @@ class DatabaseHandler {
     private $db;
 
     public function __construct() {
-        $this->host = 'localhost';
+        $this->host = getenv('DB_HOST') ?: 'localhost';
         $this->rootUser = 'root';
-        $this->rootPass = '';
+        $this->rootPass = getenv('DB_ROOT_PASSWORD') ?: '';
 
         $this->databaseName = 'SheetMusicDatabase';
         $this->sheetMusicTable = 'SheetMusicTable';
@@ -44,7 +44,7 @@ class DatabaseHandler {
 
                 // Insert data
                 $databaseHandler->insertSheetMusic(new SheetMusic(
-                    abcNotation: "X:1\nT: Cooley's\nM: 4/4\nL: 1/8\nR: reel\nK: Emin\n|:D2|EB{c}BA B2 EB|~B2 AB dBAG|FDAD BDAD|FDAD dAFD|\nEBBA B2 EB|B2 AB defg|afe^c dBAF|DEFD E2:|\n|:gf|eB B2 efge|eB B2 gedB|A2 FA DAFA|A2 FA defg|\neB B2 eBgB|eB B2 defg|afe^c dBAF|DEFD E2:|",
+                    abcNotation: "X:1\nM: 4/4\nL: 1/8\nR: reel\nK: Emin\n|:D2|EB{c}BA B2 EB|~B2 AB dBAG|FDAD BDAD|FDAD dAFD|\nEBBA B2 EB|B2 AB defg|afe^c dBAF|DEFD E2:|\n|:gf|eB B2 efge|eB B2 gedB|A2 FA DAFA|A2 FA defg|\neB B2 eBgB|eB B2 defg|afe^c dBAF|DEFD E2:|",
                     userID: 1,
                     musicTitle: "Example Music 1",
                 ));

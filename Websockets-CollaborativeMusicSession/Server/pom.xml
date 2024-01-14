@@ -9,8 +9,8 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>lars.cloud</groupId>
-	<artifactId>spring-boot</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>MusicSession</artifactId>
+	<version>1.0</version>
 	<name>MusicSession</name>
 	<description>The server for a collaborative music session</description>
 	<properties>

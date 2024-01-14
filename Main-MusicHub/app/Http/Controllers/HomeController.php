@@ -63,7 +63,7 @@ class HomeController extends Controller
         }
 
         // user sheetMusic
-        $soapClient = new SoapClient(config('services.sheetmusicAPI.wsdl'));
+        $soapClient = new SoapClient(config('services.SheetMusicAPI.wsdl'));
         $userSheetMusic = (new SheetMusicController)->convertSheetsMusicToObject($soapClient->getMusicByUserID ($userID));
 
         return view('Home.home', [

@@ -1,0 +1,25 @@
+services:
+  SheetMusicAPI:
+    build:
+      context: .
+    image: larsgielen/sheetmusicapi:1.0
+    ports:
+      - 5054:80
+    environment:
+      DB_HOST: db
+      DB_ROOT_PASSWORD: root
+      PORT: 5054
+
+  db:
+    image: mariadb:10.6
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    restart: always
+    ports:
+      - 5055:80
+    environment:
+      - PMA_ARBITRARY=1
