@@ -6,7 +6,7 @@
   <h1>MusicHub</h1>
 </div>
 
-# Welcome to MuseHub!
+# Welcome to MusicHub!
 Welcome to MuseHub, a website that allows users to buy and sell musical instruments, organize and attend events, collaborate on sheet music creation, and communicate with other users. This wiki provides an overview of the website's functionalities and how to navigate through them.
 
 MuseHub is built using the Laravel PHP framework, with the authentication system powered by the Breeze package. The website seamlessly integrates six different web services to provide a comprehensive musical experience. These services include GraphQL, REST API, SOAP, gRPC, Websockets, and MQTT.
