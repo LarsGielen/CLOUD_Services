@@ -11,6 +11,15 @@ Welcome to MuseHub, a website that allows users to buy and sell musical instrume
 
 MuseHub is built using the Laravel PHP framework, with the authentication system powered by the Breeze package. The website seamlessly integrates six different web services to provide a comprehensive musical experience. These services include GraphQL, REST API, SOAP, gRPC, Websockets, and MQTT.
 
+# Running the Website
+This project is completely set up with Docker files. To start the server, simply run the following command:
+
+```console
+docker-compose -p musichub up -d
+``````
+
+The website is accesable from with the url http://localhost:7070
+
 # Page Overview
 
 ## Authentication page
@@ -36,3 +45,4 @@ The Music Session page allows users to create or join a room and create new shee
 
 ## Tuner page (MQTT)
 The Tuner page allows users to conect their tuner to the website, this way they can check if they are playing to many wrong notes.
+
