@@ -18,7 +18,7 @@ This project is completely set up with Docker files. To start the server, simply
 docker-compose -p musichub up -d
 ``````
 
-The website is accesable from with the url http://localhost:7070
+The website is accessible from with the url http://localhost:7070
 
 # Page Overview
 
