@@ -41,6 +41,7 @@ class AbcToPDFConverter {
             $browser->close();
         }
         catch (Exception $e) {
+            error_log($e->getMessage());
             return null;
         }
 

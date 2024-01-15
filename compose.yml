@@ -1,38 +1,30 @@
 version: '3'
 
 services:
-  # website_php:
-  #   build:
-  #     context: ./Main-MusicHub
-  #     target: php
-  #   ports:
-  #     - "7070:80"
-  #   environment:
-  #     - APP_NAME=MusicHub
-  #     - APP_URL=http://localhost
-  #     - DB_CONNECTION=mysql
-  #     - DB_HOST=db
-  #     - DB_PORT=3306
-  #     - DB_DATABASE=MusicHub
-  #     - DB_USERNAME=root
-  #     - DB_PASSWORD=root
-  #     - API_URL_SHEETMUSIC="sheet_music_api:80"
-  #     - API_URL_INSTRUMENTLIBRARY="instrument_library_api:80"
-  #     - API_URL_MESSAGESERVICE="message_service:6060"
-  #     - API_URL_EVENTBOOKING="event_booking_api:80"
-  #     - API_URL_MUSICSESSION="collaborative_music_session_service:80"
-  #     - API_URL_TUNERSERVICE="c3a83306c2b24c68835c34e6983a57b1.s2.eu.hivemq.cloud:8884/mqtt"
-  #   depends_on:
-  #     - db
-  #     - phpmyadmin
-
-  # website_node:
-  #   build:
-  #     context: ./Main-MusicHub
-  #     target: node
-  #   ports:
-  #     - 5173:5173
-  #   command: "npm run dev"
+  website:
+    build:
+      context: ./Main-MusicHub
+    ports:
+      - "7070:80"
+      - "5173:5173"
+    environment:
+      - APP_NAME=MusicHub
+      - APP_URL=http://localhost
+      - DB_CONNECTION=mysql
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_DATABASE=MusicHub
+      - DB_USERNAME=root
+      - DB_PASSWORD=root
+      - API_URL_SHEETMUSIC="sheet_music_api:80"
+      - API_URL_INSTRUMENTLIBRARY="instrument_library_api:80"
+      - API_URL_MESSAGESERVICE="localhost:5052"
+      - API_URL_EVENTBOOKING="event_booking_api:80"
+      - API_URL_MUSICSESSION="localhost:5054"
+      - API_URL_TUNERSERVICE="c3a83306c2b24c68835c34e6983a57b1.s2.eu.hivemq.cloud:8884/mqtt"
+    depends_on:
+      - db
+      - phpmyadmin
 
   sheet_music_api:
     build:
@@ -41,8 +33,14 @@ services:
       - "5050:80"
     environment:
       DB_HOST: db
+      DB_PORT: 3306
       DB_ROOT_PASSWORD: root
-      PORT: 80
+      DB_ROOT_USER: root
+      SERVICE_HOST_NAME: sheet_music_api
+      SERVICE_HOST_PORT: 80
+    depends_on:
+      - db
+      - phpmyadmin
 
   instrument_library_api:
     build:
@@ -55,7 +53,6 @@ services:
       context: ./gRPC-MessageService/gRPC-MessageService
     ports:
       - "5052:6060"
-      - "6061:6061"
 
   event_booking_api:
     build:
@@ -72,6 +69,8 @@ services:
   db:
     image: mariadb:10.6
     restart: always
+    ports: 
+      - "5055:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
 
@@ -79,6 +78,6 @@ services:
     image: phpmyadmin:latest
     restart: always
     ports:
-      - 5055:80
+      - 5056:80
     environment:
       - PMA_ARBITRARY=1

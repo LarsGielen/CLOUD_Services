@@ -7,8 +7,9 @@ use Laminas\Soap\AutoDiscover;
 use Laminas\Soap\Server;
 
 // Set the URI for the service
-$port = getenv('PORT') ?: 5054;
-$uri = 'http://localhost:' . $port . '/SheetMusicAPI.php';
+$port = getenv('SERVICE_HOST_PORT') ?: 5050;
+$hostName = getenv('SERVICE_HOST_NAME') ?: 'localhost';
+$uri = 'http://' . $hostName . ':' . $port . '/SheetMusicAPI.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     // Return the wsdl file to the browser

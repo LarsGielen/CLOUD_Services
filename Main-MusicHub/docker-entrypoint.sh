@@ -40,6 +40,6 @@ API_URL_TUNERSERVICE=${API_URL_TUNERSERVICE}
 php artisan migrate --force
 php artisan db:seed
 
-php artisan serve --port=80 --host=0.0.0.0 --env=.env
+npm run dev & php artisan serve --port=80 --host=0.0.0.0 --env=.env
 
 exec docker-php-entrypoint "$@"

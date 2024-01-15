@@ -15,6 +15,9 @@ class SheetMusicController extends Controller
      */
     public function index(): View
     {
+        ini_set('soap.wsdl_cache_enabled',0);
+        ini_set('soap.wsdl_cache_ttl',0);
+
         // create a new soap client from the wsdl file provided by the service
         $soapClient = new SoapClient(config('services.SheetMusicAPI.wsdl'));
 
@@ -32,6 +35,9 @@ class SheetMusicController extends Controller
      */
     public function filter(Request $request): View
     {
+        ini_set('soap.wsdl_cache_enabled',0);
+        ini_set('soap.wsdl_cache_ttl',0);
+
         $title = $request->post()['title'];
 
         // create a new soap client from the wsdl file provided by the service
@@ -48,6 +54,9 @@ class SheetMusicController extends Controller
 
     public function create(Request $request)
     {
+        ini_set('soap.wsdl_cache_enabled',0);
+        ini_set('soap.wsdl_cache_ttl',0);
+
         $title = $request->post()["title"];
         $notation = $request->post()["notation"];
         $userID = Auth::user()->id;
@@ -64,6 +73,9 @@ class SheetMusicController extends Controller
      */
     public function show(int $id): View
     {
+        ini_set('soap.wsdl_cache_enabled',0);
+        ini_set('soap.wsdl_cache_ttl',0);
+
         // create a new soap client from the wsdl file provided by the service
         $soapClient = new SoapClient(config('services.SheetMusicAPI.wsdl'));
 
@@ -83,13 +95,16 @@ class SheetMusicController extends Controller
      */
     public function generatePDF(int $id)
     {
+        ini_set('soap.wsdl_cache_enabled',0);
+        ini_set('soap.wsdl_cache_ttl',0);
+        
         // create a new soap client from the wsdl file provided by the service
         $soapClient = new SoapClient(config('services.SheetMusicAPI.wsdl'));
 
         // call the function via the soap client and get the response
         $link = json_decode($soapClient->convertMusicToPdfById($id))->data;
 
-        return response()->json(['link' => config('services.SheetMusicAPI.url') . "/" . $link]);
+        return response()->json(['link' => config('services.SheetMusicAPI.pdf_location') . "/" . $link]);
     }
 
     public function convertSheetsMusicToObject($sheetMusicString) 

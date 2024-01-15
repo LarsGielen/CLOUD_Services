@@ -34,6 +34,7 @@ return [
     'SheetMusicAPI'=> [
         'url' => "http://" . env('API_URL_SHEETMUSIC', "localhost:5050"),
         'wsdl' => "http://" . env('API_URL_SHEETMUSIC', "localhost:5050") . "/SheetMusicAPI.php?wsdl",
+        'pdf_location' => "http://localhost:5050",
     ],
 
     'InstrumentLibraryAPI'=> [

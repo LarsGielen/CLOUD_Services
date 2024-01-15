@@ -3,6 +3,7 @@
 require_once 'models.php';
 
 class DatabaseHandler {
+    private $port;
     private $host;
     private $rootUser;
     private $rootPass;
@@ -12,15 +13,16 @@ class DatabaseHandler {
     private $db;
 
     public function __construct() {
+        $this->port = getenv('DB_PORT') ?: '3306';
         $this->host = getenv('DB_HOST') ?: 'localhost';
-        $this->rootUser = 'root';
-        $this->rootPass = getenv('DB_ROOT_PASSWORD') ?: '';
+        $this->rootUser = getenv('DB_ROOT_USER') ?: 'root';
+        $this->rootPass = getenv('DB_ROOT_PASSWORD') ?: 'root';
 
         $this->databaseName = 'SheetMusicDatabase';
         $this->sheetMusicTable = 'SheetMusicTable';
 
         try {
-            $this->db = new PDO("mysql:host={$this->host}", $this->rootUser, $this->rootPass);
+            $this->db = new PDO("mysql:host={$this->host};port={$this->port}", $this->rootUser, $this->rootPass);
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             // Check if the database already exists
