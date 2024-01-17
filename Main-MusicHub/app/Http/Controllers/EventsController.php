@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -31,19 +32,26 @@ class EventsController extends Controller
 
     public function create(Request $request): View
     {
-        $response = Http::withHeaders([
-            'Content-Type' => 'application/json',
-        ])->post(config("services.EventBookingAPI.url") . "/api/events", [
-            'locationID' => $request->post()['locationID'],
-            'organizerID' => $request->post()['organizerID'],
-            'date' => $request->post()['date'] . " " . $request->post()['time'],
-            'name' => $request->post()['name'],
-            'description' => $request->post()['description'],
-            'ticketPrice' => $request->post()['ticketPrice'],
-            'seats' => $request->post()['seats'],
-            'remainingSeats' => $request->post()['seats'],
-            'imageURL' => $request->post()['imageURL'],
-        ]);
+        try {
+            $response = Http::withHeaders([
+                'Content-Type' => 'application/json',
+            ])->post(config("services.EventBookingAPI.url") . "/api/events", [
+                'locationID' => $request->post()['locationID'],
+                'organizerID' => $request->post()['organizerID'],
+                'date' => $request->post()['date'] . " " . $request->post()['time'],
+                'name' => $request->post()['name'],
+                'description' => $request->post()['description'],
+                'ticketPrice' => $request->post()['ticketPrice'],
+                'seats' => $request->post()['seats'],
+                'remainingSeats' => $request->post()['seats'],
+                'imageURL' => $request->post()['imageURL'],
+            ]);
+        }
+        catch (Exception $e) {
+            return view('error', [
+                'message'=> 'An error accured while creating your event, please fill in all required fields'
+            ]);
+        }
 
         return $this->showEvent(json_decode($response)->event->id);
     }

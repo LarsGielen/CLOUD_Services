@@ -15,7 +15,7 @@ def on_send():
 
 # Create the main window
 window = tk.Tk()
-window.title("Simple UI")
+window.title("Tuner simulator")
 
 # Device name input
 device_name_label = tk.Label(window, text="Device name:")

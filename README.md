@@ -25,24 +25,32 @@ The website is accessible from with the url http://localhost:7070
 ## Authentication page
 The user can log in to his acount, or create a new acount via this page. This page is powered by the laravel breeze package.
 
+There are 5 default users you can use to log in with, or you can make your own user. The default users are:    
+  - user1@user.com with password user1
+  - user2@user.com with password user2
+  - user3@user.com with password user3
+  - user4@user.com with password user4
+  - user5@user.com with password user5
+
 ## Home page
-The home page shows some recommended and personal items. It shows the most popular events, the music you uploaded and the event that you have booked
+The home page shows some recommended and personal items. It shows the most popular events, the music you uploaded and the events that you have booked
 
 ## Instruments page (graphql)
-The Instrument page shows all Instruments that are on sale. The user can filter the instrulent on different criteria like price, instrument type and more. The user can also create its own sale post. 
+The instrument page shows all instruments that are on sale. The user can filter the instrulent on different criteria like price, instrument type and more. The user can also create its own sale post. 
 
 ## Events page (REST)
-The Event page shows all events. The user can sort these events by popularity, name, price and date. If users are logged in they also have the option to look at their booked events. If user want to go to an event they can book tickets, and users can also create a new event, or delete an event that they have created. 
+The event page shows all events. The user can sort these events by popularity, name, price and date. If users are logged in they also have the option to look at their booked events. If user want to go to an event they can book tickets, and users can also create a new event, or delete an event that they have created. 
 
 ## Sheet Music page (SOAP)
-The Sheet Music page shows all uploaded sheet music. This music is searchable by title. Users can look at the music, generate a PDF or senda message to the componist. 
+The sheetmusic page shows all uploaded sheet music. This music is searchable by title. Users can look at the music, generate a PDF or senda message to the componist. 
 
 ## Messages page (gRPC)
 Here users can see and reply to all their messages.
 
 ## Music Session (websockets)
-The Music Session page allows users to create or join a room and create new sheet music together. when the music is done they can upload the music to the Sheet Music API.
+The music session page allows users to create or join a room and create new sheet music together. when the music is done they can upload the music to the Sheet Music API.
 
 ## Tuner page (MQTT)
 The Tuner page allows users to conect their tuner to the website, this way they can check if they are playing to many wrong notes.
 
+Use the Tuner simulator to test this page

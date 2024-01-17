@@ -295,7 +295,17 @@ class InstrumentController extends Controller
             'variables' => $instrumentVariables
         ]);
 
-        $post = json_decode($response)->data->createInstrumentPost;
+        $response = json_decode($response);
+
+        if ($response->errors != null) {
+            return view('error', [
+                'message'=> 'An error accured while creating your instrument post, please fill in all required fields'
+            ]);
+        }
+
+        $post = $response->data->createInstrumentPost;
+        
+
         return view('Instruments.detail', [
             'post' => $post,
             'messageServerUrl' => config('services.MessageService.url')
