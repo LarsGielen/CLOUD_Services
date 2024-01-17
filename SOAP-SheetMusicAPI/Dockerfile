@@ -24,14 +24,20 @@ RUN apt-get update && apt-get install -y nodejs
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /var/www/html
-COPY . .
 
 COPY --from=composer:2.6.3 /usr/bin/composer /usr/bin/composer
 
+COPY ./composer.* ./
+COPY ./package.json ./
+COPY ./package-lock.json ./
 RUN composer install --prefer-dist --no-scripts --no-progress --no-interaction
+RUN npm install
+RUN npm update
+
+COPY . .
+
 RUN composer dump-autoload --optimize
 
+RUN mkdir pdfs
 RUN chmod -R 755 /var/www/html/pdfs && \
     chown -R www-data:www-data /var/www/html/pdfs
-
-RUN npm install
