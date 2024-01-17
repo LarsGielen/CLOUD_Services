@@ -54,6 +54,6 @@ The music session page allows users to create or join a room and create new shee
 The Tuner page allows users to conect their tuner to the website, this way they can check if they are playing to many wrong notes.
 Use the Tuner simulator to test this page
 
-## Openopus page (MQTT)
+## Openopus page (external)
 The Openopus page allows users to look at the date from the open source [openopus](https://openopus.org/) API. This is a free and open source API to a database for clasical music metadata.
 
