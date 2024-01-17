@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MusicSessionController;
+use App\Http\Controllers\OpenopusWikiController;
 use App\Http\Controllers\TunerController;
 use Illuminate\Support\Facades\Route;
 
@@ -61,6 +62,10 @@ Route::get('/musicsession', [MusicSessionController::class, 'show'])->name('musi
 
 // Tuner Service (MQTT)
 Route::get('/tuner', [TunerController::class,'show'])->name('tuner.show');
+
+// Openopus wiki (externe service)
+Route::get('/openopus', [OpenopusWikiController::class,'index'])->name('openopus.index');
+Route::get('/openopus/{id}', [OpenopusWikiController::class,'show'])->name('openopus.show');
 
 Route::middleware('auth')->group(function () {
 

@@ -56,4 +56,8 @@ return [
     'TunerService'=> [
         'url' => "wss://" . env('API_URL_TUNERSERVICE', "c3a83306c2b24c68835c34e6983a57b1.s2.eu.hivemq.cloud:8884/mqtt"),
     ],
+
+    'Openopus'=> [
+        'url' => "https://api.openopus.org",
+    ],
 ];

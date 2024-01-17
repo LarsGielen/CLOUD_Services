@@ -48,6 +48,11 @@
                         {{ __('Tuner') }}
                     </x-nav-link>
 
+                    <!-- Openopus wiki page -->
+                    <x-nav-link :href="route('openopus.index')" :active="request()->routeIs('openopus.index')">
+                        {{ __('Openopus') }}
+                    </x-nav-link>
+
                     <!-- Wiki link -->
                     <x-nav-link href="https://github.com/LarsG-2158052/CLOUD_Services/wiki">
                         {{ __('Wiki') }}
