@@ -79,5 +79,5 @@
         </div>
     </div>
 
-    @include('Instruments.Partials.messageModal')
+    @include('Instruments.Partials.messagemodal')
 </x-app-layout>
